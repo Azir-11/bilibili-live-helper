@@ -16,5 +16,6 @@ module.exports = {
 		quotes: [2, "double"],
 		"no-tabs": 0,
 		camelcase: "off",
+		"vue/multi-word-component-names": "off",
 	},
 };

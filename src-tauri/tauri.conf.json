@@ -55,13 +55,13 @@
 		},
 		"windows": [
 			{
+				"title": "哔哩哔哩-弹幕姬",
+				"url": "",
 				"fullscreen": false,
 				"height": 600,
 				"resizable": true,
-				"title": "哔哩哔哩-直播助手",
 				"width": 800,
-				"decorations": false,
-				"theme": "Dark"
+				"decorations": false
 			}
 		]
 	}
