@@ -2,6 +2,8 @@
 
 ## 基于 tauri + vite + vue3 开发的跨平台桌面应用
 
+## 项目正在开发中，欢迎提交 Pull Request
+
 #### 安装依赖
 
 ```shell
@@ -16,15 +18,13 @@ yarn install
 
 ##### 启动应用前请先确保电脑已经安装了 [rust 环境](https://tauri.app/zh/v1/guides/getting-started/prerequisites)
 
-````shell
-
 ```shell
 #npm
 npm run tauri dev
 
 #yarn
 yarn tauri dev
-````
+```
 
 #### 打包应用
 
