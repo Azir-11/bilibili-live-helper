@@ -1,0 +1,45 @@
+@import "./reset.scss";
+@import "./theme.scss";
+
+@font-face {
+	font-family: HarmonyOS;
+
+	src: url("../font/HarmonyOS.ttf");
+	font-display: auto;
+}
+
+@font-face {
+	font-family: number;
+
+	src: url("../font/DS-DIGIT.TTF");
+	font-display: auto;
+}
+
+* {
+	&::-webkit-scrollbar {
+		width: 5px;
+		height: 5px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 5px;
+		background-color: var(--scroll-thumb-color);
+
+		&:hover {
+			background-color: var(--scroll-thumb-color-hover);
+		}
+	}
+
+	&::-webkit-scrollbar-track {
+		border-radius: 5px;
+		background: var(--scroll-track-color);
+	}
+}
+
+body {
+	overflow: hidden;
+
+	word-break: break-all;
+
+	font: 14px/1 HarmonyOS;
+}
