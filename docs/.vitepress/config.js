@@ -35,7 +35,8 @@ export default defineConfig({
 		},
 
 		editLink: {
-			pattern: "https://github.com/vuejs/vitepress/edit/main/docs/:path",
+			pattern:
+				"https://github.com/bilibili-ayang/bilibili-live-helper/tree/master/docs/:path",
 			text: "去 Github 编辑此页",
 		},
 
