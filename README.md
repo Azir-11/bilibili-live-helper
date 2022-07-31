@@ -16,7 +16,7 @@ yarn install
 
 #### 启动应用
 
-##### 启动应用前请先确保电脑已经安装了 [rust 环境](https://tauri.app/zh/v1/guides/getting-started/prerequisites)
+##### 启动应用前请先确保电脑已经安装了 [rust 环境](https://tauri.app/v1/guides/getting-started/prerequisites/)
 
 ```shell
 #npm

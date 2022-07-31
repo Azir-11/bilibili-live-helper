@@ -27,10 +27,11 @@ export default defineConfig({
           ]
         }
       ],
-      dts: "src/auto-import.d.ts"
+      dts: "src/types/auto-import.d.ts"
     }),
     Components({
-      resolvers: [NaiveUiResolver()]
+      resolvers: [NaiveUiResolver()],
+      dts: "src/types/components.d.ts"
     })
   ],
   resolve: {

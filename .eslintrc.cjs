@@ -4,7 +4,11 @@ module.exports = {
 		es2021: true,
 		node: true,
 	},
-	extends: ["plugin:vue/vue3-strongly-recommended", "standard"],
+	extends: [
+		"vue-global-api",
+		"plugin:vue/vue3-strongly-recommended",
+		"standard",
+	],
 	parserOptions: {
 		ecmaVersion: "latest",
 		parser: "@typescript-eslint/parser",
@@ -14,8 +18,18 @@ module.exports = {
 	rules: {
 		semi: [2, "always"],
 		quotes: [2, "double"],
+		"comma-dangle": [2, "never"],
+		"eol-last": [2, "never"],
 		"no-tabs": 0,
 		camelcase: "off",
 		"vue/multi-word-component-names": "off",
 	},
+	overrides: [
+		{
+			files: ["auto-import.d.ts", "components.d.ts"],
+			rules: {
+				"no-unused-vars": "off",
+			},
+		},
+	],
 };
