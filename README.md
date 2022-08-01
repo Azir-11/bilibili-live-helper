@@ -55,3 +55,9 @@ npm run docs:build
 #yarn
 yarn docs:build
 ```
+
+#### Contributors
+
+<a href="https://github.com/bilibili-ayang/bilibili-live-helper/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=bilibili-ayang/bilibili-live-helper" />
+</a>

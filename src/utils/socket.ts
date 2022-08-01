@@ -66,7 +66,9 @@ export const decode = (blob: any) => {
 
             group.forEach((item) => {
               try {
-                if (item && item.includes("{")) { result.body.push(JSON.parse(item)); }
+                if (item && item.includes("{")) {
+                  result.body.push(JSON.parse(item));
+                }
               } catch (e) {
                 // 忽略非 JSON 字符串，通常情况下为分隔符
               }
