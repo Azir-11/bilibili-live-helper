@@ -21,6 +21,9 @@ import { openNewWindow } from "@/utils/tauriApi";
     <n-button @click="openNewWindow('/prompt')">
       打开提示姬
     </n-button>
+    <n-button @click="openNewWindow('/websocket')">
+      开启直播连接
+    </n-button>
   </div>
 </template>
 

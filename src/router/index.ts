@@ -33,6 +33,11 @@ const routes: Route[] = [
     path: "/clock",
     name: "clock",
     component: () => import("@/views/clock-helper/index.vue")
+  },
+  {
+    path: "/websocket",
+    name: "websocket",
+    component: () => import("@/views/websocket-helper/index.vue")
   }
 ];
 

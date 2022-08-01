@@ -54,6 +54,11 @@ const windowOptions: Record<Path, WindowOptions> = {
     width: 350,
     height: 450,
     ...commonOption
+  },
+  "/websocket": {
+    title: commonTitle + "状态姬",
+    visible: false,
+    skipTaskbar: true
   }
 };
 
