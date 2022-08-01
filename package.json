@@ -10,7 +10,7 @@
 		"docs:serve": "npx vitepress serve docs",
 		"tauri": "tauri",
 		"preview": "vite preview",
-		"lint": "eslint ./src/**/*.{vue,ts} --fix",
+		"lint": "eslint './src/**/*.{vue,ts}' --fix",
 		"prepare": "husky install"
 	},
 	"lint-staged": {

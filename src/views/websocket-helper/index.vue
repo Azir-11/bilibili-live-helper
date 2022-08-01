@@ -1,5 +1,5 @@
-<script setup lang='ts'>
-import { openWebsocket } from "./index";
+<script setup lang="ts">
+import { openWebsocket } from ".";
 onMounted(() => openWebsocket());
 </script>
 

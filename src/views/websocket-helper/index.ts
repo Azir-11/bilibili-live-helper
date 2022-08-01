@@ -3,7 +3,7 @@ import { encode, decode } from "@/utils/socket";
 import { nanoid } from "nanoid";
 
 let websocket: WebSocket;
-let timer: NodeJS.Timer | null;
+let timer: ReturnType<typeof setInterval> | null;
 
 const websocketUrl = "ws://broadcastlv.chat.bilibili.com:2244/sub";
 const roomid = 1440094;

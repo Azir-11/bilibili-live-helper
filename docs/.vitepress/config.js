@@ -37,7 +37,7 @@ export default defineConfig({
 		editLink: {
 			pattern:
 				"https://github.com/bilibili-ayang/bilibili-live-helper/tree/master/docs/:path",
-			text: "去 Github 编辑此页",
+			text: "去 Github 编辑此页面",
 		},
 
 		// 全文搜索相关配置
