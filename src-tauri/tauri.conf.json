@@ -11,6 +11,7 @@
 		"version": "0.1.0"
 	},
 	"tauri": {
+		"macOSPrivateApi": true,
 		"allowlist": {
 			"all": true
 		},
@@ -55,13 +56,8 @@
 		},
 		"windows": [
 			{
-				"title": "哔哩哔哩-弹幕姬",
-				"url": "",
-				"fullscreen": false,
-				"height": 600,
-				"resizable": true,
-				"width": 800,
-				"decorations": false
+				"title": "哔哩哔哩-直播助手",
+				"url": "/"
 			}
 		]
 	}

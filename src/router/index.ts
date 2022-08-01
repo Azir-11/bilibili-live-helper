@@ -1,16 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
-import BarrageHelper from "@/views/barrage-helper/index.vue";
+import HelperSettings from "@/views/helper-settings/index.vue";
+import type { RouteRecordRaw } from "vue-router";
+import type { Route } from "@/types/router";
 
-export const routes = [
+const routes: Route[] = [
   {
     path: "/",
-    name: "barrage",
-    component: BarrageHelper
+    name: "settings",
+    component: HelperSettings
   },
   {
-    path: "/settings",
-    name: "settings",
-    component: () => import("@/views/helper-settings/index.vue")
+    path: "/barrage",
+    name: "barrage",
+    component: () => import("@/views/barrage-helper/index.vue")
   },
   {
     path: "/fans",
@@ -36,7 +38,7 @@ export const routes = [
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes: routes as RouteRecordRaw[]
 });
 
 export default router;
