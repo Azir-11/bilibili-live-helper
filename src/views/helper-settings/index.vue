@@ -7,6 +7,12 @@ import type { MenuOption } from "naive-ui";
 const currentComponent = shallowRef<Component>();
 
 /**
+ * 菜单图标渲染
+ * @param iconClass 图标类名
+ */
+const renderIcon = (iconClass: string) => h("i", { class: iconClass });
+
+/**
  * 给菜单列表每一项设置 key
  * @param options 菜单项
  */
@@ -23,24 +29,30 @@ const setMenuOptionsKey = (options: MenuOption[]) =>
 // 菜单项
 const menuOptions = setMenuOptionsKey([
   {
-    label: "助手首页"
+    label: "助手首页",
+    icon: () => renderIcon("i-carbon-home")
   },
   {
     label: "账户设置",
+    icon: () => renderIcon("i-carbon-user"),
     children: [
       {
-        label: "主播信息"
+        label: "主播信息",
+        icon: () => renderIcon("i-carbon-user-online")
       },
       {
-        label: "管理信息"
+        label: "管理信息",
+        icon: () => renderIcon("i-carbon-machine-learning")
       }
     ]
   },
   {
     label: "弹幕助手",
+    icon: () => renderIcon("i-carbon-certificate-check"),
     children: [
       {
-        label: "弹幕设置"
+        label: "弹幕设置",
+        icon: () => renderIcon("i-carbon-settings")
       },
       {
         label: "自动回复"
