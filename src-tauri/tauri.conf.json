@@ -64,6 +64,10 @@
 				"title": "哔哩哔哩-直播助手",
 				"url": "/"
 			}
-		]
+		],
+		"systemTray": {
+			"iconPath": "icons/icon.png",
+			"iconAsTemplate": true
+		}
 	}
 }
