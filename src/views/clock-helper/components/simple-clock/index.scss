@@ -1,0 +1,20 @@
+.clock-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 0 0.2em #87F, 0 0 0.2em #87F, 0 0 0.2em #87F;
+
+  .time {
+    font-size: 80px;
+  }
+
+  .date {
+    font-size: 30px;
+  }
+}

@@ -32,6 +32,7 @@
 		"@unocss/transformer-directives": "^0.45.1",
 		"@vitejs/plugin-vue": "^3.0.0",
 		"commitlint": "^17.0.3",
+		"dayjs": "^1.11.4",
 		"eslint": "^8.0.1",
 		"eslint-config-standard": "^17.0.0",
 		"eslint-plugin-import": "^2.25.2",

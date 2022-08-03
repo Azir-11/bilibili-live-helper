@@ -41,10 +41,12 @@ const windowOptions: Record<Path, WindowOptions> = {
   },
   "/clock": {
     title: commonTitle + "时钟姬",
-    x: getAvailWidth() - 800,
-    y: getAvailHeight() - 170,
-    width: 800,
-    height: 170,
+    x: getAvailWidth() - 500,
+    y: getAvailHeight() - 200,
+    width: 500,
+    height: 200,
+    transparent: true,
+    alwaysOnTop: true,
     ...commonOption
   },
   "/prompt": {
