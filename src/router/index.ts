@@ -1,13 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HelperSettings from "@/views/helper-settings/index.vue";
+import { settingsRoutes } from "./settings";
 import type { RouteRecordRaw } from "vue-router";
 import type { Route } from "@/types/router";
 
-const routes: Route[] = [
+export const routes: Route[] = [
   {
     path: "/",
     name: "settings",
-    component: HelperSettings
+    component: HelperSettings,
+    children: settingsRoutes
   },
   {
     path: "/barrage",

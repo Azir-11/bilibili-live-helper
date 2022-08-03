@@ -1,88 +1,48 @@
 <script setup lang="ts">
-import AboutHelper from "./components/about-helper/index.vue";
-import type { Component } from "vue";
+import { RouterLink } from "vue-router";
+import { settingsRoutes } from "@/router/settings";
+import type { RouteRecordRaw } from "vue-router";
 import type { MenuOption } from "naive-ui";
 
-// 当前选中菜单的对应组件
-const currentComponent = shallowRef<Component>();
+const $route = useRoute();
 
 /**
- * 菜单图标渲染
- * @param iconClass 图标类名
+ * 返回 naive-ui 所需菜单项
+ * @param routes 路由列表
  */
-const renderIcon = (iconClass: string) => h("i", { class: iconClass });
+const renderMenuOptions = (routes: RouteRecordRaw[] = settingsRoutes) => {
+  const options: MenuOption[] = [];
 
-/**
- * 给菜单列表每一项设置 key
- * @param options 菜单项
- */
-const setMenuOptionsKey = (options: MenuOption[]) =>
-  options.map((item, index) => ({
-    key: `${index}`,
-    ...item,
-    children: item?.children?.map((childItem, childIndex) => ({
-      key: `${index}-${childIndex}`,
-      ...childItem
-    }))
-  }));
+  routes.forEach((item) => {
+    console.log("item.meta?.icon", item.meta?.icon);
+    const option: MenuOption = {
+      key: item.name as string,
+      type: item.children && "group",
+      icon: () => h("i", { class: item.meta?.icon })
+    };
 
-// 菜单项
-const menuOptions = setMenuOptionsKey([
-  {
-    label: "助手首页",
-    icon: () => renderIcon("i-carbon-home")
-  },
-  {
-    label: "账户设置",
-    icon: () => renderIcon("i-carbon-user"),
-    children: [
-      {
-        label: "主播信息",
-        icon: () => renderIcon("i-carbon-user-online")
-      },
-      {
-        label: "管理信息",
-        icon: () => renderIcon("i-carbon-machine-learning")
-      }
-    ]
-  },
-  {
-    label: "弹幕助手",
-    icon: () => renderIcon("i-carbon-certificate-check"),
-    children: [
-      {
-        label: "弹幕设置",
-        icon: () => renderIcon("i-carbon-settings")
-      },
-      {
-        label: "自动回复"
-      },
-      {
-        label: "语音播报"
-      }
-    ]
-  },
-  {
-    label: "点歌助手"
-  },
-  {
-    label: "粉丝助手"
-  },
-  {
-    label: "时钟助手"
-  },
-  {
-    label: "提示助手"
-  },
-  {
-    label: "关于助手",
-    component: AboutHelper
-  }
-]);
+    if (item.children) {
+      option.label = item.meta?.title;
+      option.children = renderMenuOptions(item.children);
+    } else {
+      option.label = () =>
+        h(
+          RouterLink,
+          {
+            to: {
+              name: item.name
+            }
+          },
+          {
+            default: () => item.meta?.title
+          }
+        );
+    }
 
-// 菜单的 key 发生变化
-const changeMenuKey = (key: string, item: any) => {
-  currentComponent.value = item.component;
+    options.push(option);
+  });
+
+  return options;
 };
 </script>
 
@@ -98,16 +58,19 @@ const changeMenuKey = (key: string, item: any) => {
         :width="185"
       >
         <n-menu
-          default-value="0"
-          :options="menuOptions"
-          @update-value="changeMenuKey"
+          :default-value="$route.name as string"
+          :options="renderMenuOptions()"
         />
       </n-layout-sider>
       <n-layout-content>
-        <component
-          :is="currentComponent"
-          class="p-1.5"
-        />
+        <RouterView v-slot="{ Component }">
+          <keep-alive>
+            <component
+              :is="Component"
+              class="p-1.5"
+            />
+          </keep-alive>
+        </RouterView>
       </n-layout-content>
     </n-layout>
   </div>
