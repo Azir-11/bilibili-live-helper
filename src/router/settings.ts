@@ -1,3 +1,4 @@
+// @unocss-include
 import type { RouteRecordRaw } from "vue-router";
 
 export const settingsRoutes: RouteRecordRaw[] = [
@@ -85,7 +86,7 @@ export const settingsRoutes: RouteRecordRaw[] = [
           ),
         meta: {
           title: "语音播报",
-          icon: "i-carbon-voice-activate"
+          icon: "i-carbon-volume-up"
         }
       }
     ]

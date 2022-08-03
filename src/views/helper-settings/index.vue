@@ -14,7 +14,6 @@ const renderMenuOptions = (routes: RouteRecordRaw[] = settingsRoutes) => {
   const options: MenuOption[] = [];
 
   routes.forEach((item) => {
-    console.log("item.meta?.icon", item.meta?.icon);
     const option: MenuOption = {
       key: item.name as string,
       type: item.children && "group",
@@ -41,7 +40,6 @@ const renderMenuOptions = (routes: RouteRecordRaw[] = settingsRoutes) => {
 
     options.push(option);
   });
-
   return options;
 };
 </script>
@@ -64,12 +62,12 @@ const renderMenuOptions = (routes: RouteRecordRaw[] = settingsRoutes) => {
       </n-layout-sider>
       <n-layout-content>
         <RouterView v-slot="{ Component }">
-          <keep-alive>
+          <KeepAlive>
             <component
               :is="Component"
               class="p-1.5"
             />
-          </keep-alive>
+          </KeepAlive>
         </RouterView>
       </n-layout-content>
     </n-layout>
