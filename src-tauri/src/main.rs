@@ -3,13 +3,14 @@
   windows_subsystem = "windows"
 )]
 
+use tauri::Manager;
+
 mod tray;
 
 fn main() {
   let content = tauri::generate_context!();
   
-  use tauri::Manager;
-  tauri::Builder::default()
+  let mut _app =tauri::Builder::default()
   .system_tray(tray::menu())  // ✅ 将 `tauri.conf.json` 上配置的图标添加到系统托盘
   .on_system_tray_event(tray::handler) // ✅ 注册系统托盘事件处理程序
   .setup(|_app| {
@@ -21,6 +22,11 @@ fn main() {
     }
     Ok(())
   })
-  .run(content)
-  .expect("error while running tauri application");
+  .build(content)
+  .expect("error while building tauri application");
+
+  #[cfg(target_os = "macos")] //✅ `macOS`下不显示docker图标
+  _app.set_activation_policy(tauri::ActivationPolicy::Accessory);
+
+  _app.run(|_app_handle, _event| {});
 }
