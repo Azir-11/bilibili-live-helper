@@ -45,7 +45,7 @@ const renderMenuOptions = (routes: RouteRecordRaw[] = settingsRoutes) => {
 </script>
 
 <template>
-  <div class="helper-settings h-screen">
+  <div class="helper-settings">
     <n-layout
       has-sider
       class="h-full"

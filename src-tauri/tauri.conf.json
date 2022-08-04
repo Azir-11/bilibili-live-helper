@@ -62,7 +62,8 @@
 		"windows": [
 			{
 				"title": "哔哩哔哩-直播助手",
-				"url": "/"
+				"url": "/",
+				"alwaysOnTop": true
 			}
 		],
 		"systemTray": {

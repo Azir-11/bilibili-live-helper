@@ -8,8 +8,8 @@ const commonOption: WindowOptions = {
   resizable: false,
   fullscreen: false,
   maximized: false,
-  decorations: false
-  // transparent: true,
+  decorations: false,
+  transparent: true
 };
 
 const windowOptions: Record<Path, WindowOptions> = {
@@ -29,6 +29,7 @@ const windowOptions: Record<Path, WindowOptions> = {
     y: getAvailHeight() - 170,
     width: 400,
     height: 170,
+    alwaysOnTop: true,
     ...commonOption
   },
   "/fans": {
@@ -45,8 +46,6 @@ const windowOptions: Record<Path, WindowOptions> = {
     y: getAvailHeight() - 200,
     width: 500,
     height: 200,
-    transparent: true,
-    alwaysOnTop: true,
     ...commonOption
   },
   "/prompt": {
