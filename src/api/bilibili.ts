@@ -1,13 +1,10 @@
 import { getQueryData } from ".";
+import { baseUrl, baseUserId } from "@/constants";
 
-// 小破站公共的请求前缀
-const baseUrl = "https://api.bilibili.com";
-// const QRcodeBaseUrl = "https://passport.bilibili.com";
-
-// 获取粉丝数量
-const getFansApi = async () =>
-  await getQueryData(`${baseUrl}/x/relation/stat`, {
-    query: { vmid: "478490349", jsonp: "jsonp" }
+// 获取用户信息
+const getUserInfoApi = async (userid: number = baseUserId) =>
+  await getQueryData(`${baseUrl}/x/space/acc/info`, {
+    query: { mid: "" + userid, jsonp: "jsonp" }
   });
 
-export { getFansApi };
+export { getUserInfoApi };

@@ -39,7 +39,7 @@
 			"longDescription": "",
 			"macOS": {
 				"entitlements": null,
-				"exceptionDomain": "",
+				"exceptionDomain": "hdslb.com",
 				"frameworks": [],
 				"providerShortName": null,
 				"signingIdentity": null
@@ -63,7 +63,8 @@
 			{
 				"title": "哔哩哔哩-直播助手",
 				"url": "/",
-				"alwaysOnTop": true
+				"alwaysOnTop": true,
+				"resizable": false
 			}
 		],
 		"systemTray": {

@@ -1,18 +1,15 @@
 import { emit } from "@tauri-apps/api/event";
-import { encode, decode } from "@/utils/socket";
 import { nanoid } from "nanoid";
+
+import { encode, decode } from "@/utils/socket";
+import { websocketUrl, messageEvent, popularityEvent } from "@/constants";
 
 let websocket: WebSocket;
 let timer: ReturnType<typeof setInterval> | null;
 
-const websocketUrl = "ws://broadcastlv.chat.bilibili.com:2244/sub";
-const roomid = 1440094;
-
 // 开启长链接
-export const openWebsocket = () => {
-  if (websocket) {
-    websocket.close();
-  }
+export const openWebsocket = (roomid: number) => {
+  closeWebsocket();
 
   if (timer) {
     clearInterval(timer);
@@ -22,18 +19,23 @@ export const openWebsocket = () => {
   websocket = new WebSocket(websocketUrl);
 
   websocket.onopen = () => {
-    websocket && websocket.readyState === websocket.OPEN && onConnect();
+    websocket && websocket.readyState === websocket.OPEN && onConnect(roomid);
   };
 
   websocket.onmessage = (msgEvent) => onMessage(msgEvent);
 
-  websocket.onerror = () => openWebsocket();
+  websocket.onerror = () => openWebsocket(roomid);
 
-  websocket.onclose = () => openWebsocket();
+  websocket.onclose = () => openWebsocket(roomid);
+};
+
+// 关闭长链接
+export const closeWebsocket = () => {
+  websocket && websocket.close();
 };
 
 // 发送连接信息
-const onConnect = () => {
+const onConnect = (roomid: number) => {
   websocket.send(
     encode(
       JSON.stringify({
@@ -60,14 +62,14 @@ const onMessage = async (msgEvent: any) => {
   switch (result.op) {
     case 3:
       // 发出人气信息
-      await emit("popularity-trigger", result.body.count);
+      await emit(popularityEvent, result.body.count);
       break;
     case 5:
       for (const item of result.body) {
         const id = nanoid();
         const { cmd } = item;
         // 发出其他信息
-        await emit("message-trigger", { cmd, id, item });
+        await emit(messageEvent, { cmd, id, item });
       }
       break;
   }
