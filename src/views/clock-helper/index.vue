@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import { closeWindow } from "@/utils/tauriApi";
 import FlipClock from "./components/flip-clock/index.vue";
 import SimpleClock from "./components/simple-clock/index.vue";
@@ -12,14 +12,12 @@ onMounted(async () => {
 });
 
 const changeClock = (newClock: string) => {
-  console.log("newClock", newClock);
   const lookup: any = {
     FlipClock,
     SimpleClock
   };
   clock.value = lookup[newClock];
 };
-
 </script>
 
 <template>
@@ -35,7 +33,7 @@ const changeClock = (newClock: string) => {
         简单
       </n-button>
       <n-button
-        class="i-carbon-close-outline text-xl text-red"
+        class="i-carbon-close-outline text-red text-xl"
         @click="closeWindow()"
       />
     </div>
@@ -54,14 +52,13 @@ const changeClock = (newClock: string) => {
   height: 100vh;
 
   .title-bar {
-    @apply opacity-0 rounded-lg hover: bg-gray-500 hover:opacity-75 hover:flex hover:justify-around hover:items-center hover:text-gray-200 hover:cursor-pointer;
+    @apply hover: rounded-lg bg-gray-500 opacity-0 hover:flex hover:cursor-pointer hover:items-center hover:justify-around hover:text-gray-200 hover:opacity-75;
   }
 
   .content {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
-
 }
 </style>

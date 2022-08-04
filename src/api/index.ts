@@ -17,7 +17,6 @@ const getQueryData = async (url: string, options: Partial<FetchOptions>) => {
       throw response?.message || "请求出错，再试试吧~";
     }
   } catch (error: any) {
-    console.log("error", error);
     const { message } = createDiscreteApi(["message"]);
 
     let errorMessage = error;

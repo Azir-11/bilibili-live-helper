@@ -1,5 +1,5 @@
-import { getQueryData } from ".";
 import { Body } from "@tauri-apps/api/http";
+import { getQueryData } from ".";
 
 // 直播信息公共的请求前缀
 const baseUrl = "https://api.live.bilibili.com";

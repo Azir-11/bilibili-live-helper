@@ -4,7 +4,7 @@
   <div class="music-helper text-white">
     <div class="h-5 bg-transparent" />
     <div
-      class="music-cover z-99 absolute top-0 left-5 overflow-hidden rounded-full"
+      class="music-cover z-99 group absolute top-0 left-5 overflow-hidden rounded-full"
     >
       <n-avatar
         round
@@ -14,15 +14,14 @@
         歌曲图片
       </n-avatar>
       <div
-        class="operate absolute top-0 left-0 flex h-full w-full items-center justify-center bg-black/60 text-2xl text-white/60 opacity-0"
+        class="operate absolute top-0 left-0 flex h-full w-full items-center justify-center bg-black/60 text-[30px] text-white/60 opacity-0 duration-300 group-hover:opacity-100"
       >
         <i class="i-carbon-play-filled" />
         <i class="i-carbon-play-filled-alt" />
       </div>
     </div>
     <div
-      class="content relative h-full overflow-hidden rounded-xl bg-cover bg-center"
-      data-tauri-drag-region
+      class="content relative h-full overflow-hidden rounded-xl bg-cover bg-center before:blur-[2px] after:bg-black/60"
     >
       <div class="absolute z-20 h-full w-full px-4 py-5">
         <!-- 音乐信息 -->
@@ -74,39 +73,22 @@
 
 <style scoped lang="scss">
 .music-helper {
-  .music-cover:hover {
+  .music-cover {
     .operate {
-      transition: all 0.3s;
-
-      opacity: 1;
-      i:hover {
-        transition: 0.5s;
-
-        color: #fff;
+      i {
+        @apply cursor-pointer duration-500 hover:text-white;
       }
     }
   }
+
   .content {
     &::before,
     &::after {
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      width: 100%;
-      height: 100%;
-
-      content: "";
+      @apply absolute top-0 left-0 h-full w-full content-none;
     }
 
     &::before {
       background: inherit;
-
-      filter: blur(2px);
-    }
-
-    &::after {
-      background-color: rgba(0, 0, 0, 0.6);
     }
   }
 }

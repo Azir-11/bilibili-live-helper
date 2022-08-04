@@ -36,6 +36,7 @@ pub fn handler(_app: &AppHandle, event: SystemTrayEvent) {
             ..
         } => {
             println!("system tray received a left click");
+            window.show().unwrap();
         }
         // 右键点击
         SystemTrayEvent::RightClick {
