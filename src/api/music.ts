@@ -6,7 +6,6 @@ const baseUrl = "https://music-node.vercel.app";
 // 查找歌单列表
 const searchPlaylistApi = async (id: string) =>
   await getQueryData(`${baseUrl}/playlist/detail`, {
-    method: "GET",
     query: {
       id: id || "3778678"
     }
@@ -15,7 +14,6 @@ const searchPlaylistApi = async (id: string) =>
 // 搜索音乐信息
 const searchMusicInfoApi = async (keywords: string) =>
   await getQueryData(`${baseUrl}/cloudsearch`, {
-    method: "GET",
     query: {
       keywords
     }
@@ -24,7 +22,6 @@ const searchMusicInfoApi = async (keywords: string) =>
 // 搜索歌词
 const searchLyricApi = async (id: number) =>
   await getQueryData(`${baseUrl}/lyric`, {
-    method: "GET",
     query: {
       id
     }

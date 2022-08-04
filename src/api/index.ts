@@ -3,19 +3,21 @@ import { createDiscreteApi } from "naive-ui";
 import type { FetchOptions } from "@tauri-apps/api/http";
 
 // 请求总入口
-const getQueryData = async (url: string, options: FetchOptions) => {
+const getQueryData = async (url: string, options: Partial<FetchOptions>) => {
   try {
     const { data: response }: Record<string, any> = await fetch(url, {
       ...options,
+      method: options.method || "GET",
       timeout: 60000
     });
 
     if (response?.code === 0 || response?.code === 200) {
-      return response;
+      return response?.data ?? response;
     } else {
       throw response?.message || "请求出错，再试试吧~";
     }
   } catch (error: any) {
+    console.log("error", error);
     const { message } = createDiscreteApi(["message"]);
 
     let errorMessage = error;
@@ -32,5 +34,6 @@ const getQueryData = async (url: string, options: FetchOptions) => {
 
 export { getQueryData };
 
-export * from "./barrage";
+export * from "./bilibili";
+export * from "./live";
 export * from "./music";
