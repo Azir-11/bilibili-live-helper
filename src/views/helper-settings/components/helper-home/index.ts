@@ -12,7 +12,7 @@ const baseInfo = ref();
 // 通过userid获取用户基本信息和直播信息
 const getBaseInfo = async () => {
   // TODO 获取保存的userid
-  const userId = "1237388007";
+  const userId = "213280180";
 
   const {
     name,
@@ -46,8 +46,9 @@ watch(liveStatus, (val) =>
 
 // 计算开播时长
 const liveDuration = computed(() => {
-  const realTime = dayjs(baseInfo.value.live_time).subtract(6, "hours");
-  return dayjs().diff(realTime, "minute") + "分钟";
+  const start_utc = dayjs(baseInfo.value.live_time).subtract(8, "hours");
+  const local_utc = dayjs().subtract(dayjs().utcOffset(), "minutes");
+  return local_utc.diff(start_utc, "minute") + "分钟";
 });
 
 // 切换直播状态
