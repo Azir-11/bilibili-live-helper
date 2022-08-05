@@ -14,6 +14,11 @@
     "macOSPrivateApi": true,
     "allowlist": {
       "all": true,
+      "fs": {
+        "scope": [
+          "**"
+        ]
+      },
       "http": {
         "all": true,
         "request": true,

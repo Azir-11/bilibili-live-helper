@@ -1,11 +1,8 @@
 import { Store } from "tauri-plugin-store-api";
-import { configDir } from "@tauri-apps/api/path";
-import { STORE_DEFAULT_VALUES } from "@/constants";
-
-const getConfigPath = await configDir();
+import { STORE_DEFAULT_VALUES, STORE_DEFAULT_PATH } from "@/constants";
 
 // 创建一个 store 对象
-const store = new Store(`${getConfigPath}bilibili-live-helper/.config.dat`);
+const store = new Store(`${STORE_DEFAULT_PATH}/.config.dat`);
 
 // 初始化store文件
 const initStore = async () => {
