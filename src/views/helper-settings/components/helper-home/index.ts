@@ -3,7 +3,10 @@ import { confirm } from "@tauri-apps/api/dialog";
 
 import { getUserInfoApi } from "@/api/bilibili";
 import { getLiveStatusApi, changeLiveStatusApi } from "@/api";
-import { openWebsocket, closeWebsocket } from "@/hooks/useWebsocket";
+import {
+  openWebsocket
+  //  closeWebsocket
+} from "@/hooks/useWebsocket";
 
 import { defatultAvatar } from "@/constants/bilibili";
 
@@ -12,7 +15,7 @@ const baseInfo = ref();
 // 通过userid获取用户基本信息和直播信息
 const getBaseInfo = async () => {
   // TODO 获取保存的userid
-  const userId = "213280180";
+  const userId = "171684364";
 
   const {
     name,
@@ -24,6 +27,9 @@ const getBaseInfo = async () => {
   } = await getUserInfoApi(userId);
 
   const { by_room_ids } = await getLiveStatusApi(roomid);
+
+  openWebsocket(roomid);
+
   const liveInfo = Object.values(by_room_ids)[0] as Object;
 
   baseInfo.value = {
@@ -40,9 +46,9 @@ const liveStatus = computed(() => {
 });
 
 // 动态操作websocket
-watch(liveStatus, (val) =>
-  val ? openWebsocket(baseInfo.value?.room_id) : closeWebsocket()
-);
+// watch(liveStatus, (val) =>
+//   // val ? openWebsocket(baseInfo.value?.room_id) : closeWebsocket()
+// );
 
 // 计算开播时长
 const liveDuration = computed(() => {

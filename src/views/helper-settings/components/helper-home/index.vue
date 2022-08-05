@@ -9,8 +9,8 @@ let timer: ReturnType<typeof setInterval>;
 
 onMounted(async () => {
   getBaseInfo();
-  if (timer) clearInterval(timer);
-  timer = setInterval(() => getBaseInfo(), 1000 * 30);
+  // if (timer) clearInterval(timer);
+  // timer = setInterval(() => getBaseInfo(), 1000 * 30);
 });
 
 onUnmounted(() => clearInterval(timer));

@@ -1,30 +1,29 @@
 import { Store } from "tauri-plugin-store-api";
 import { configDir } from "@tauri-apps/api/path";
+import { STORE_DEFAULT_VALUES } from "@/constants";
 
-import defaultConfig from "@/options/config";
+const getConfigPath = await configDir();
 
-const configPath = await configDir();
 // 创建一个 store 对象
-const store = new Store(`${configPath}bilibili-live-helper/config.json`);
+const store = new Store(`${getConfigPath}bilibili-live-helper/.config.dat`);
 
 // 初始化store文件
 const initStore = async () => {
   try {
     await store.load();
     // 合并初始配置和用户自定义配置，以防缺少配置项
-    Object.keys(defaultConfig).forEach(async (key: string) => {
-      const setValue = (await getStore(key)) || defaultConfig[key];
-      console.log("setValue", key, setValue);
+    for (const key of Object.keys(STORE_DEFAULT_VALUES)) {
+      const setValue = (await getStore(key)) || STORE_DEFAULT_VALUES[key];
+
       await setStore(key, setValue);
-    });
-    console.log("store", store);
+    }
+
     await saveStore();
   } catch (error) {
-    Object.keys(defaultConfig).forEach(async (key: string) => {
-      const defaultValue = defaultConfig[key];
+    for (const key of Object.keys(STORE_DEFAULT_VALUES)) {
+      const defaultValue = STORE_DEFAULT_VALUES[key];
       await setStore(key, defaultValue);
-    });
-    await saveStore(); // 保存到本地的时候会自动创建文件夹和文件;
+    }
   }
 };
 
@@ -39,10 +38,12 @@ const getStore = async (key: string) => {
 const setStore = async (key: string, value: any) => {
   try {
     await store.set(key, value);
+
+    await saveStore();
   } catch (error) {}
 };
 
-// 写入store文件
+// 写入 store 文件
 const saveStore = async () => {
   try {
     await store.save();

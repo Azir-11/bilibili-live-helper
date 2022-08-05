@@ -63,6 +63,8 @@ const onConnect = (roomid: number) => {
 // 接收弹幕信息
 const onMessage = async (msgEvent: any) => {
   const result: any = await decode(msgEvent.data);
+  console.log("result", result);
+
   switch (result.op) {
     case 3:
       // 发出人气信息
