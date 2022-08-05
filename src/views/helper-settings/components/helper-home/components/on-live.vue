@@ -56,7 +56,7 @@ import { liveDuration, baseInfo } from "../";
         </n-tag>
       </n-space>
     </template>
-    <n-text v-html="baseInfo?.description" />
+    <n-p v-html="baseInfo?.description" />
 
     <n-space justify="space-between">
       <n-text class="text-sm">
@@ -66,6 +66,18 @@ import { liveDuration, baseInfo } from "../";
         开播时长：{{ liveDuration }}
       </n-text>
     </n-space>
+    <n-input-group class="m-t-2">
+      <n-input
+        readonly
+        placeholder="推流地址"
+      />
+      <n-button
+        type="info"
+        ghost
+      >
+        复制
+      </n-button>
+    </n-input-group>
   </n-card>
 </template>
 

@@ -4,6 +4,7 @@
 )]
 
 use tauri::Manager;
+use tauri_plugin_store::PluginBuilder;
 
 mod tray;
 
@@ -22,6 +23,7 @@ fn main() {
     }
     Ok(())
   })
+  .plugin(PluginBuilder::default().build()) // ✅ 启用tauri插件
   .build(content)
   .expect("error while building tauri application");
 
