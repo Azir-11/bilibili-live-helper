@@ -4,4 +4,4 @@ import router from "./router";
 import "uno.css";
 import "./assets/css/global.scss";
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(router).use(createPinia()).mount("#app");
