@@ -1,11 +1,15 @@
 import { emit } from "@tauri-apps/api/event";
 import { nanoid } from "nanoid";
-
 import { encode, decode } from "@/utils/socket";
-import { websocketUrl, messageEvent, popularityEvent } from "@/constants";
+import {
+  WEBSOCKET_URL,
+  BARRAGE_MESSAGE_EVENT,
+  POPULARITY_EVENT
+} from "@/constants";
+import type { SetInterval } from "@/types";
 
 let websocket: WebSocket;
-let timer: ReturnType<typeof setInterval> | null;
+let timer: SetInterval | null;
 
 // 开启长链接
 export const openWebsocket = (roomid: number) => {
@@ -16,7 +20,7 @@ export const openWebsocket = (roomid: number) => {
     timer = null;
   }
 
-  websocket = new WebSocket(websocketUrl);
+  websocket = new WebSocket(WEBSOCKET_URL);
 
   websocket.onopen = () => {
     websocket && websocket.readyState === websocket.OPEN && onConnect(roomid);
@@ -62,14 +66,14 @@ const onMessage = async (msgEvent: any) => {
   switch (result.op) {
     case 3:
       // 发出人气信息
-      await emit(popularityEvent, result.body.count);
+      await emit(POPULARITY_EVENT, result.body.count);
       break;
     case 5:
       for (const item of result.body) {
         const id = nanoid();
         const { cmd } = item;
         // 发出其他信息
-        await emit(messageEvent, { cmd, id, item });
+        await emit(BARRAGE_MESSAGE_EVENT, { cmd, id, item });
       }
       break;
   }

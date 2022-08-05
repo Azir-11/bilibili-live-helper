@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getBaseInfo, baseInfo, liveStatus, changeLiveStatus } from ".";
-import { spaceBaseUrl } from "@/constants";
+import { HOME_URL_PREFIX } from "@/constants";
 
 import OnLive from "./components/on-live.vue";
 import OffLive from "./components/off-live.vue";
@@ -30,7 +30,7 @@ onUnmounted(() => clearInterval(timer));
             <n-text class="text-xl">
               欢迎回来
               <a
-                :href="`${spaceBaseUrl}/${baseInfo?.uid}`"
+                :href="`${HOME_URL_PREFIX}/${baseInfo?.uid}`"
                 target="_blank"
                 class="!text-blue"
               >{{ baseInfo?.name }}</a>

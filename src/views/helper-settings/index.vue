@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import { settingsRoutes } from "@/router/settings";
-import { appWindow } from "@tauri-apps/api/window";
 import type { RouteRecordRaw } from "vue-router";
 import type { MenuOption } from "naive-ui";
 
@@ -43,17 +42,6 @@ const renderMenuOptions = (routes: RouteRecordRaw[] = settingsRoutes) => {
   });
   return options;
 };
-
-// 调用窗口 close 事件时触发，如果是 main 窗口，仅进行隐藏操作
-onMounted(async () => {
-  await appWindow.onCloseRequested(async (event) => {
-    if (event.windowLabel === "main") {
-      event.preventDefault();
-
-      appWindow.hide();
-    }
-  });
-});
 </script>
 
 <template>

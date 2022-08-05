@@ -3,18 +3,22 @@ import { createDiscreteApi } from "naive-ui";
 import type { FetchOptions } from "@tauri-apps/api/http";
 
 // 请求总入口
-const getQueryData = async (url: string, options: Partial<FetchOptions>) => {
+const getQueryData = async (
+  url: string,
+  options: Partial<FetchOptions>,
+  returnError: boolean = false
+) => {
   try {
     const { data: response }: Record<string, any> = await fetch(url, {
       ...options,
       method: options.method || "GET",
-      timeout: 60000
+      timeout: 1000 * 60
     });
 
-    if (response?.code === 0 || response?.code === 200) {
+    if (returnError || response?.code === 0 || response?.code === 200) {
       return response?.data ?? response;
     } else {
-      throw response?.message || "请求出错，再试试吧~";
+      throw response?.message || response?.msg || "请求出错，再试试吧~";
     }
   } catch (error: any) {
     const { message } = createDiscreteApi(["message"]);

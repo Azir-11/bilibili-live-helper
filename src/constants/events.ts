@@ -1,7 +1,10 @@
-// 弹幕消息分发事件
-const messageEvent = "message-trigger";
+// 粉丝数量事件分发名称
+const FANS_COUNT_EVENT = "fans-count";
 
-// 人气更新分发事件
-const popularityEvent = "popularity-trigger";
+// 弹幕消息事件分发名称
+const BARRAGE_MESSAGE_EVENT = "barrage-message";
 
-export { messageEvent, popularityEvent };
+// 人气分发事件分发名称
+const POPULARITY_EVENT = "popularity";
+
+export { FANS_COUNT_EVENT, BARRAGE_MESSAGE_EVENT, POPULARITY_EVENT };

@@ -56,9 +56,7 @@ import { liveDuration, baseInfo } from "../";
         </n-tag>
       </n-space>
     </template>
-    <n-text>
-      {{ baseInfo?.description }}
-    </n-text>
+    <n-text v-html="baseInfo?.description" />
 
     <n-space justify="space-between">
       <n-text class="text-sm">
