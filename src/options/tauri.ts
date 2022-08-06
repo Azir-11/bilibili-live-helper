@@ -14,7 +14,7 @@ const commonOption: WindowOptions = {
 
 const windowOptions: Record<Path, WindowOptions> = {
   "/": {
-    title: "main"
+    title: "哔哩哔哩-直播助手"
   },
   "/barrage": {
     title: commonTitle + "弹幕姬",

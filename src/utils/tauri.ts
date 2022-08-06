@@ -12,7 +12,7 @@ const openNewWindow = async (url: Path) => {
   // 窗口 option
   const option = windowOptions[url];
   // 窗口 label
-  const label = option.title!;
+  const label = url === "/" ? "main" : option.title!;
 
   // 查找是否存在窗口 存在就显示并获取焦点 不存在则新建
   // BUG：如果主窗口被刷新了，再次打开新窗口时就获取不到，导致获取不了焦点。

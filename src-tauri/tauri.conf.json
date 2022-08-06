@@ -66,8 +66,10 @@
       {
         "label": "splash-screen",
         "url": "/splash-screen",
-        "decorations": false,
-        "alwaysOnTop": true
+        "alwaysOnTop": true,
+        "width": 340,
+        "height": 390,
+        "resizable": false
       }
     ],
     "systemTray": {

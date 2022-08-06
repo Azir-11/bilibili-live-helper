@@ -3,6 +3,9 @@ import { RouterLink } from "vue-router";
 import { settingsRoutes } from "@/router/settings";
 import type { RouteRecordRaw } from "vue-router";
 import type { MenuOption } from "naive-ui";
+import { closeWindow } from "@/utils/tauri";
+import { ask } from "@tauri-apps/api/dialog";
+import { APP_NAME, LOGOUT_CONFIRM } from "@/constants";
 
 const $route = useRoute();
 
@@ -42,13 +45,18 @@ const renderMenuOptions = (routes: RouteRecordRaw[] = settingsRoutes) => {
   });
   return options;
 };
+
+const logout = async () => {
+  const confirm = await ask(LOGOUT_CONFIRM, APP_NAME);
+  confirm && (await closeWindow());
+};
 </script>
 
 <template>
   <div class="helper-settings">
     <n-layout
       has-sider
-      class="h-full"
+      class="relative h-full"
     >
       <n-layout-sider
         bordered
@@ -58,6 +66,10 @@ const renderMenuOptions = (routes: RouteRecordRaw[] = settingsRoutes) => {
         <n-menu
           :value="$route.name as string"
           :options="renderMenuOptions()"
+        />
+        <n-icon
+          class="i-carbon-logout hover:text-red absolute left-4 bottom-4 cursor-pointer text-2xl"
+          @click="logout"
         />
       </n-layout-sider>
       <n-layout-content>
