@@ -8,10 +8,13 @@
 
 ```shell
 #npm
-npm run install
+npm install
 
 #yarn
 yarn install
+
+#pnpm
+pnpm install
 ```
 
 #### 启动应用
@@ -24,9 +27,14 @@ npm run tauri dev
 
 #yarn
 yarn tauri dev
+
+#pnpm
+pnpm tauri dev
 ```
 
 #### 打包应用
+
+##### 如果需要打包后进行调试，请在以下命令后面加上 `--debug`
 
 ```shell
 #npm
@@ -34,6 +42,9 @@ npm run tauri build
 
 #yarn
 yarn tauri build
+
+#pnpm
+pnpm tauri build
 ```
 
 #### 打开文档
@@ -44,6 +55,9 @@ npm run docs:dev
 
 #yarn
 yarn docs:dev
+
+#pnpm
+pnpm docs:dev
 ```
 
 #### 打包文档
@@ -54,6 +68,9 @@ npm run docs:build
 
 #yarn
 yarn docs:build
+
+#pnpm
+pnpm docs:build
 ```
 
 #### Contributors

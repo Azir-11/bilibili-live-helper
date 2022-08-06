@@ -1,5 +1,5 @@
 import { fetch } from "@tauri-apps/api/http";
-import { createDiscreteApi } from "naive-ui";
+import { NaiveMessage } from "@/utils/navie";
 import type { FetchOptions } from "@tauri-apps/api/http";
 
 // 请求总入口
@@ -21,8 +21,6 @@ const getQueryData = async (
       throw response?.message || response?.msg || "请求出错，再试试吧~";
     }
   } catch (error: any) {
-    const { message } = createDiscreteApi(["message"]);
-
     let errorMessage = error;
 
     if (error.includes("timed out")) {
@@ -31,7 +29,7 @@ const getQueryData = async (
       errorMessage = "服务器连接失败";
     }
 
-    message.error(errorMessage);
+    NaiveMessage.error(errorMessage);
   }
 };
 

@@ -56,7 +56,7 @@ const renderMenuOptions = (routes: RouteRecordRaw[] = settingsRoutes) => {
         :width="185"
       >
         <n-menu
-          :default-value="$route.name as string"
+          :value="$route.name as string"
           :options="renderMenuOptions()"
         />
       </n-layout-sider>

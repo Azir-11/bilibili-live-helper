@@ -1,5 +1,7 @@
 import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
+import { writeText } from "@tauri-apps/api/clipboard";
 import { windowOptions } from "@/options/tauri";
+import { NaiveMessage } from "./navie";
 import type { Path } from "@/types/router";
 
 /**
@@ -41,4 +43,18 @@ const closeWindow = () => appWindow.close();
  */
 const setWindowOnTop = (value: boolean) => appWindow.setAlwaysOnTop(value);
 
-export { openNewWindow, minimizeWindow, closeWindow, setWindowOnTop };
+/**
+ * 复制文本
+ * @param text 需要复制的文字
+ */
+const copyText = async (text: string) => {
+  try {
+    await writeText(text);
+
+    NaiveMessage.success("复制成功");
+  } catch (error) {
+    NaiveMessage.error("复制失败");
+  }
+};
+
+export { openNewWindow, minimizeWindow, closeWindow, setWindowOnTop, copyText };

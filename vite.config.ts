@@ -18,19 +18,7 @@ export default defineConfig({
       presets: [presetUno(), presetAttributify(), presetIcons()]
     }),
     AutoImport({
-      imports: [
-        "vue",
-        "vue-router",
-        "pinia",
-        {
-          "naive-ui": [
-            "useDialog",
-            "useMessage",
-            "useNotification",
-            "useLoadingBar"
-          ]
-        }
-      ],
+      imports: ["vue", "vue-router", "pinia"],
       dts: "src/types/auto-import.d.ts",
       eslintrc: {
         enabled: false, // 默认false, true启用。生成一次就可以，避免每次工程启动都生成

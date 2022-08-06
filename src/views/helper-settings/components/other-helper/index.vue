@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { openNewWindow } from "@/utils/tauriApi";
+import { openNewWindow } from "@/utils/tauri";
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { closeWindow } from "@/utils/tauriApi";
+import { closeWindow } from "@/utils/tauri";
 import FlipClock from "./components/flip-clock/index.vue";
 import SimpleClock from "./components/simple-clock/index.vue";
 

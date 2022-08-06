@@ -15,7 +15,7 @@ const baseInfo = ref();
 // 通过userid获取用户基本信息和直播信息
 const getBaseInfo = async () => {
   // TODO 获取保存的userid
-  const userId = "171684364";
+  const userId = "480432362";
 
   const {
     name,

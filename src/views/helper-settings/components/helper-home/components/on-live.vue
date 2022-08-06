@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { open } from "@tauri-apps/api/shell";
+import { copyText } from "@/utils/tauri";
 
 import { liveDuration, baseInfo } from "../";
 </script>
@@ -74,6 +75,7 @@ import { liveDuration, baseInfo } from "../";
       <n-button
         type="info"
         ghost
+        @click="copyText('123213')"
       >
         复制
       </n-button>
