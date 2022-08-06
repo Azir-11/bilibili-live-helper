@@ -19,9 +19,6 @@ const PLAY_MUSIC_URL_PREFIX = "http://music.163.com/song/media/outer";
 // 直播长链接地址
 const WEBSOCKET_URL = "ws://broadcastlv.chat.bilibili.com:2244/sub";
 
-// OSS存储文件地址
-const OSS_URL = "http://font.ayangweb.cn/font";
-
 export {
   BASE_URL_PREFIX,
   LOGIN_URL_PREFIX,
@@ -29,6 +26,5 @@ export {
   HOME_URL_PREFIX,
   MUSIC_URL_PREFIX,
   PLAY_MUSIC_URL_PREFIX,
-  WEBSOCKET_URL,
-  OSS_URL
+  WEBSOCKET_URL
 };
