@@ -17,9 +17,10 @@ fn main() {
   .setup(|_app| {
     #[cfg(debug_assertions)] // only include this code on debug builds
     {
-      let window = _app.get_window("main").unwrap();
-      window.open_devtools();
-      window.close_devtools();
+      let flag = _app.windows().contains_key("main");
+      if flag{
+        _app.get_window("main").unwrap().open_devtools();
+      }
     }
     Ok(())
   })

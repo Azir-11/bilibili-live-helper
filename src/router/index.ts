@@ -12,6 +12,11 @@ export const routes: Route[] = [
     children: settingsRoutes
   },
   {
+    path: "/splash-screen",
+    name: "splash-screen;",
+    component: () => import("@/views/splash-screen/index.vue")
+  },
+  {
     path: "/barrage",
     name: "barrage",
     component: () => import("@/views/barrage-helper/index.vue")

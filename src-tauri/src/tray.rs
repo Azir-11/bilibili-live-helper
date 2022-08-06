@@ -25,8 +25,10 @@ pub fn menu() -> SystemTray {
 // 菜单事件
 pub fn handler(_app: &AppHandle, event: SystemTrayEvent) {
     // 获取应用窗口
-    let window = _app.get_window("main").unwrap();
-    let _parent_window = Some(&window);
+    let windows = _app.windows();
+    // 判断 main 窗口是否存在
+    let flag = windows.contains_key("main");
+
     // 匹配点击事件
     match event {
         // 左键点击
@@ -35,8 +37,11 @@ pub fn handler(_app: &AppHandle, event: SystemTrayEvent) {
             size: _,
             ..
         } => {
-            println!("system tray received a left click");
-            window.show().unwrap();
+            let keys = windows.keys();
+            println!("keys: {:?}", keys);
+            if flag{
+                _app.get_window("main").unwrap().show().unwrap();
+            }
         }
         // 右键点击
         SystemTrayEvent::RightClick {
@@ -57,7 +62,7 @@ pub fn handler(_app: &AppHandle, event: SystemTrayEvent) {
         // 根据菜单 id 进行事件匹配
         SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
             "edit_file" => {
-                message(_parent_window, "Eidt File", "TODO");
+                // message(_parent_window, "Eidt File", "TODO");
                 println!("Eidt File");
             }
             "new_file" => {
@@ -68,15 +73,15 @@ pub fn handler(_app: &AppHandle, event: SystemTrayEvent) {
                 std::process::exit(0);
             }
             "show" => {
-                window.show().unwrap();
+                // window.show().unwrap();
                 println!("Show");
             }
             "hide" => {
-                window.hide().unwrap();
+                // window.hide().unwrap();
                 println!("Hide");
             }
             "skip" => {
-                window.set_skip_taskbar(false).unwrap();
+                // window.set_skip_taskbar(false).unwrap();
                 println!("Skip");
             }
             _ => {}

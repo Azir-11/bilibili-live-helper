@@ -15,9 +15,7 @@
     "allowlist": {
       "all": true,
       "fs": {
-        "scope": [
-          "**"
-        ]
+        "scope": ["**"]
       },
       "http": {
         "all": true,
@@ -66,11 +64,10 @@
     },
     "windows": [
       {
-        "label": "main",
-        "title": "哔哩哔哩-直播助手",
-        "url": "/",
-        "alwaysOnTop": true,
-        "resizable": false
+        "label": "splash-screen",
+        "url": "/splash-screen",
+        "decorations": false,
+        "alwaysOnTop": true
       }
     ],
     "systemTray": {

@@ -14,7 +14,7 @@ const commonOption: WindowOptions = {
 
 const windowOptions: Record<Path, WindowOptions> = {
   "/": {
-    title: "哔哩哔哩-直播助手"
+    title: "main"
   },
   "/barrage": {
     title: commonTitle + "弹幕姬",
@@ -55,7 +55,8 @@ const windowOptions: Record<Path, WindowOptions> = {
     width: 350,
     height: 450,
     ...commonOption
-  }
+  },
+  "/splash-screen": {}
 };
 
 export { windowOptions };
