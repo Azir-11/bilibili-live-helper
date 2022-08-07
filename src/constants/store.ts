@@ -1,13 +1,7 @@
 import { configDir } from "@tauri-apps/api/path";
 
 const STORE_DEFAULT_VALUES: Record<string, any> = {
-  version: "1.0.0",
-  UP_INFO: {
-    uid: "uid",
-    csrf: "csrf",
-    cookie: "cookie",
-    roomid: "roomid"
-  }
+  version: "1.0.0"
 };
 
 // 本地配置文件路径

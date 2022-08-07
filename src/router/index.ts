@@ -36,10 +36,10 @@ export const routes: Route[] = [
     component: () => import("@/views/splash-screen/index.vue"),
     meta: {
       tauriOption: {
-        url: "/splash-screen",
+        title: "登录",
         alwaysOnTop: true,
         width: 340,
-        height: 390,
+        height: 400,
         resizable: false,
         maximized: false,
         fullscreen: false,

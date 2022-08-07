@@ -1,17 +1,24 @@
 import { fetch } from "@tauri-apps/api/http";
 import type { FetchOptions } from "@tauri-apps/api/http";
 import { NaiveMessage } from "@/utils/navie";
+import type { Rewrite } from "@/types";
 
 // 请求总入口
 const getQueryData = async (
   url: string,
-  options: Partial<FetchOptions>,
-  returnError: boolean = false
+  options: Rewrite<
+    Partial<FetchOptions>,
+    {
+      returnError?: boolean;
+    }
+  >
 ) => {
   try {
+    const { method, returnError } = options;
+
     const { data: response }: Record<string, any> = await fetch(url, {
       ...options,
-      method: options.method || "GET",
+      method: method || "GET",
       timeout: 1000 * 60
     });
 

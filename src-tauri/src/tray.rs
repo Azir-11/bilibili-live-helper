@@ -26,8 +26,8 @@ pub fn menu() -> SystemTray {
 pub fn handler(_app: &AppHandle, event: SystemTrayEvent) {
     // 获取应用窗口
     let windows = _app.windows();
-    // 判断 main 窗口是否存在
-    let flag = windows.contains_key("main");
+    // 判断主窗口是否存在
+    let flag = windows.contains_key("/");
 
     // 匹配点击事件
     match event {

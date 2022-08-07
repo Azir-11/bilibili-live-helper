@@ -94,9 +94,9 @@ const getEmojiApi = async () =>
       },
       headers: {
         cookie: ""
-      }
-    },
-    true
+      },
+      returnError: true
+    }
   );
 
 // 发送消息

@@ -30,37 +30,33 @@ const getRelationApi = async () =>
 
 // 获取登录url
 const getLoginUrlApi = async () =>
-  await getQueryData(`${LOGIN_URL_PREFIX}/qrcode/getLoginUrl`, {}, true);
+  await getQueryData(`${LOGIN_URL_PREFIX}/qrcode/getLoginUrl`, {
+    returnError: true
+  });
 
 // 验证二维码是否被扫
 const verifyQrCodeApi = async (oauthKey: string) =>
-  await getQueryData(
-    `${LOGIN_URL_PREFIX}/qrcode/getLoginInfo`,
-    {
-      method: "POST",
-      body: Body.json({
-        oauthKey,
-        gourl: "https://www.bilibili.com/"
-      })
-    },
-    true
-  );
+  await getQueryData(`${LOGIN_URL_PREFIX}/qrcode/getLoginInfo`, {
+    method: "POST",
+    body: Body.form({
+      oauthKey,
+      gourl: "https://www.bilibili.com/"
+    }),
+    returnError: true
+  });
 
 // 获取 up 最新的一期视频的 bvid
 const getUpNewVideoBVidApi = async () =>
-  await getQueryData(
-    `${BASE_URL_PREFIX}/x/space/arc/search`,
-    {
-      query: {
-        mid: "",
-        pn: 1,
-        ps: 1,
-        index: 1,
-        jsonp: "jsonp"
-      }
+  await getQueryData(`${BASE_URL_PREFIX}/x/space/arc/search`, {
+    query: {
+      mid: "",
+      pn: 1,
+      ps: 1,
+      index: 1,
+      jsonp: "jsonp"
     },
-    true
-  );
+    returnError: true
+  });
 
 // 获取 up 最新一期视频的信息
 const getUpNewVideoInfoApi = async () => {
