@@ -1,7 +1,7 @@
 import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
 import { writeText } from "@tauri-apps/api/clipboard";
 import { NaiveMessage } from "./navie";
-import { windowOptions } from "@/options/tauri";
+import { routes } from "@/router";
 import type { Path } from "@/types/router";
 
 /**
@@ -10,19 +10,16 @@ import type { Path } from "@/types/router";
  */
 const openNewWindow = async (url: Path) => {
   // 窗口 option
-  const option = windowOptions[url];
-  // 窗口 label
-  const label = url === "/" ? "main" : option.title!;
+  const option = routes.find(({ path }) => path === url)?.meta?.tauriOption;
 
   // 查找是否存在窗口 存在就显示并获取焦点 不存在则新建
-  // BUG：如果主窗口被刷新了，再次打开新窗口时就获取不到，导致获取不了焦点。
-  const newWindow = WebviewWindow.getByLabel(label);
+  const newWindow = WebviewWindow.getByLabel(url);
   if (newWindow) {
     newWindow.show();
   } else {
-    await new WebviewWindow(label, {
+    await new WebviewWindow(url, {
       url,
-      ...option
+      ...(option || {})
     });
   }
 };

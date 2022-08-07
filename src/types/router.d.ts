@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from "vue-router";
+import type { WindowOptions } from "@tauri-apps/api/window";
 import type { Rewrite } from ".";
 
 export type Path =
@@ -10,4 +11,13 @@ export type Path =
   | "/clock"
   | "/splash-screen";
 
-export type Route = Rewrite<RouteRecordRaw, { path: Path }>;
+export type Route = Rewrite<
+  RouteRecordRaw,
+  {
+    path: Path;
+    meta?: {
+      tauriOption: WindowOptions;
+      [key: string]: any;
+    };
+  }
+>;

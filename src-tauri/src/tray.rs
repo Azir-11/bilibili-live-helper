@@ -40,7 +40,7 @@ pub fn handler(_app: &AppHandle, event: SystemTrayEvent) {
             let keys = windows.keys();
             println!("keys: {:?}", keys);
             if flag{
-                _app.get_window("main").unwrap().show().unwrap();
+                _app.get_window("/").unwrap().show().unwrap();
             }
         }
         // 右键点击

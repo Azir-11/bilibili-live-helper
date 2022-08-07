@@ -64,12 +64,15 @@
     },
     "windows": [
       {
-        "label": "splash-screen",
+        "label": "/splash-screen",
         "url": "/splash-screen",
         "alwaysOnTop": true,
         "width": 340,
         "height": 390,
-        "resizable": false
+        "resizable": false,
+        "maximized": false,
+        "fullscreen": false,
+        "theme": "Light"
       }
     ],
     "systemTray": {
