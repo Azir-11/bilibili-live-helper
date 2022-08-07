@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getStore } from "@/store/tauri";
 import { closeWindow, openNewWindow } from "@/utils/tauri";
-
+import { CDN_URL } from "@/constants/url";
 import QRCode from "./component/QRCode.vue";
 
 const close = async () => {
@@ -46,11 +46,11 @@ onMounted(() => {
       </n-gradient-text>
     </n-space>
     <img
-      src="@/assets/img/login-left.png"
+      :src="`${CDN_URL}/img/login-left.png`"
       class="w-30 absolute left-0 bottom-0"
     >
     <img
-      src="@/assets/img/login-right.png"
+      :src="`${CDN_URL}/img/login-right.png`"
       class="w-30 absolute right-0 bottom-0"
     >
   </div>
