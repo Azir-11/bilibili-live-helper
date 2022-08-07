@@ -64,7 +64,7 @@
     },
     "windows": [
       {
-        "label": "/splash-screen",
+        "label": "splash-screen",
         "url": "/splash-screen",
         "title": "登录",
         "alwaysOnTop": true,
@@ -73,6 +73,8 @@
         "resizable": false,
         "maximized": false,
         "fullscreen": false,
+        "focus": true,
+        "center": true,
         "theme": "Light"
       }
     ],

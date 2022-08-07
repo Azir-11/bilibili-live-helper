@@ -1,4 +1,5 @@
 import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
+// import { WebviewWindow, appWindow } from "@tauri-apps/api";
 import { writeText } from "@tauri-apps/api/clipboard";
 import { NaiveMessage } from "./navie";
 import { routes } from "@/router";
@@ -9,15 +10,16 @@ import type { Path } from "@/types/router";
  * @param url 窗口的路由地址
  */
 const openNewWindow = async (url: Path) => {
+  const label = url.replace("/", "");
   // 窗口 option
   const option = routes.find(({ path }) => path === url)?.meta?.tauriOption;
 
   // 查找是否存在窗口 存在就显示并获取焦点 不存在则新建
-  const newWindow = WebviewWindow.getByLabel(url);
+  const newWindow = WebviewWindow.getByLabel(label);
   if (newWindow) {
     newWindow.show();
   } else {
-    await new WebviewWindow(url, {
+    await new WebviewWindow(label, {
       url,
       ...(option || {})
     });
@@ -33,6 +35,19 @@ const minimizeWindow = () => appWindow.minimize();
  * 关闭当前窗口
  */
 const closeWindow = () => appWindow.close();
+
+/**
+ * 显示某个窗口
+ */
+const showWindow = async (lable: string) => {
+  const window = await WebviewWindow.getByLabel(lable);
+  window && window.show();
+};
+
+/**
+ * 隐藏当前窗口
+ */
+const hideWindow = () => appWindow.hide();
 
 /**
  * 设置当前窗口置顶状态
@@ -54,4 +69,12 @@ const copyText = async (text: string) => {
   }
 };
 
-export { openNewWindow, minimizeWindow, closeWindow, setWindowOnTop, copyText };
+export {
+  openNewWindow,
+  minimizeWindow,
+  closeWindow,
+  showWindow,
+  hideWindow,
+  setWindowOnTop,
+  copyText
+};

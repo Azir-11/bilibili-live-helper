@@ -1,33 +1,41 @@
-use tauri::{SystemTray, CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu,SystemTrayEvent,AppHandle};
-use tauri::Manager;
-use  tauri::api::dialog::message;
+use tauri::{SystemTray, CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu,SystemTrayEvent,AppHandle, Manager};
+// use  tauri::api::dialog::message;
 
-// 托盘菜单
-pub fn menu() -> SystemTray {
+
+
+// 加载菜单
+pub fn main_menu()-> SystemTray {
     let tray_menu = SystemTrayMenu::new()
-        .add_submenu(SystemTraySubmenu::new( // 子菜单
-            "File", // 子菜单名称
-            SystemTrayMenu::new()
-                .add_item(CustomMenuItem::new("new_file".to_string(), "New File")) // 子菜单项（新增）
-                .add_item(CustomMenuItem::new("edit_file".to_string(), "Edit File")), // 子菜单项（编辑）
-        ))
-        .add_native_item(SystemTrayMenuItem::Separator) // 分割线
-        .add_item(CustomMenuItem::new("hide".to_string(), "Hide")) // 隐藏应用窗口
-        .add_item(CustomMenuItem::new("show".to_string(), "Show")) // 显示应用窗口
-        .add_item(CustomMenuItem::new("skip".to_string(), "Skip")) // 显示应用窗口
-        .add_native_item(SystemTrayMenuItem::Separator) // 分割线
-        .add_item(CustomMenuItem::new("quit".to_string(), "Quit")); // 退出
+    .add_submenu(SystemTraySubmenu::new( // 子菜单
+        "File", // 子菜单名称
+        SystemTrayMenu::new()
+            .add_item(CustomMenuItem::new("new_file".to_string(), "New File").disabled()) // 子菜单项（新增）
+            .add_item(CustomMenuItem::new("edit_file".to_string(), "Edit File")), // 子菜单项（编辑）
+    ))
+    .add_native_item(SystemTrayMenuItem::Separator) // 分割线
+    .add_item(CustomMenuItem::new("toggle".to_string(), "Hide")) // 显示/隐藏应用窗口
+    .add_native_item(SystemTrayMenuItem::Separator) // 分割线
+    .add_item(CustomMenuItem::new("switch".to_string(), "Swith")) // 切换
+    .add_native_item(SystemTrayMenuItem::Separator) // 分割线
+    .add_item(CustomMenuItem::new("quit".to_string(), "Quit")); // 退出
 
-    // 设置在右键单击系统托盘时显示菜单
     SystemTray::new().with_menu(tray_menu)
 }
 
+
+
 // 菜单事件
-pub fn handler(_app: &AppHandle, event: SystemTrayEvent) {
+pub fn handler(app: &AppHandle, event: SystemTrayEvent) {
+
+// 托盘菜单
+let loading_menu =     SystemTrayMenu::new()
+.add_item(CustomMenuItem::new("quit".to_string(), "Quit")); // 退出
+
+
     // 获取应用窗口
-    let windows = _app.windows();
+    let windows = app.windows();
     // 判断主窗口是否存在
-    let flag = windows.contains_key("/");
+    let main_flag = windows.contains_key("main");
 
     // 匹配点击事件
     match event {
@@ -37,10 +45,10 @@ pub fn handler(_app: &AppHandle, event: SystemTrayEvent) {
             size: _,
             ..
         } => {
-            let keys = windows.keys();
-            println!("keys: {:?}", keys);
-            if flag{
-                _app.get_window("/").unwrap().show().unwrap();
+            if main_flag{
+                let window = app.get_window("main").unwrap();
+                window.show().unwrap();
+                window.set_focus().unwrap();
             }
         }
         // 右键点击
@@ -60,32 +68,43 @@ pub fn handler(_app: &AppHandle, event: SystemTrayEvent) {
             println!("system tray received a double click");
         }
         // 根据菜单 id 进行事件匹配
-        SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
-            "edit_file" => {
-                // message(_parent_window, "Eidt File", "TODO");
-                println!("Eidt File");
+        SystemTrayEvent::MenuItemClick { id, .. } => {
+            let item_handle = app.tray_handle().get_item(&id);
+            match id.as_str() {
+                
+                "edit_file" => {
+                    // message(_parent_window, "Eidt File", "TODO");
+                    println!("Eidt File");
+                }
+                "new_file" => {
+                    // message(parent_window, "New File", "TODO");
+                    println!("New File");
+                }
+                "quit" => {
+                    std::process::exit(0);
+                }
+                "switch" => {
+                    println!("switch");
+                    if main_flag{
+                        app.tray_handle().set_menu( loading_menu.clone()).unwrap();
+                    }
+                }
+                "toggle" => {
+                    if main_flag{
+                        let window = app.get_window("main").unwrap();
+                        let new_title = if window.is_visible().unwrap() {
+                            window.hide().unwrap();
+                            "Show"
+                        } else {
+                            window.show().unwrap();
+                            "Hide"
+                        };
+                        item_handle.set_title(new_title).unwrap();
+                    }
+                }
+                _ => {}
             }
-            "new_file" => {
-                // message(parent_window, "New File", "TODO");
-                println!("New File");
-            }
-            "quit" => {
-                std::process::exit(0);
-            }
-            "show" => {
-                // window.show().unwrap();
-                println!("Show");
-            }
-            "hide" => {
-                // window.hide().unwrap();
-                println!("Hide");
-            }
-            "skip" => {
-                // window.set_skip_taskbar(false).unwrap();
-                println!("Skip");
-            }
-            _ => {}
-        },
+        }
         _ => {}
     }
 }

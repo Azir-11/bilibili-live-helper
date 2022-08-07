@@ -3,9 +3,10 @@ import { RouterLink } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 import type { MenuOption } from "naive-ui";
 import { ask } from "@tauri-apps/api/dialog";
-import { closeWindow } from "@/utils/tauri";
+import { closeWindow, showWindow } from "@/utils/tauri";
 import { settingsRoutes } from "@/router/settings";
-import { APP_NAME, LOGOUT_CONFIRM } from "@/constants";
+import { APP_NAME, LOGOUT_CONFIRM, UP_INFO } from "@/constants";
+import { setStore } from "@/store/tauri";
 
 const $route = useRoute();
 
@@ -48,7 +49,12 @@ const renderMenuOptions = (routes: RouteRecordRaw[] = settingsRoutes) => {
 
 const logout = async () => {
   const confirm = await ask(LOGOUT_CONFIRM, APP_NAME);
-  confirm && (await closeWindow());
+  if (confirm) {
+    // TODO 注销登录的功能有BUG
+    await showWindow("splash-screen");
+    await setStore(UP_INFO.all, {});
+    await closeWindow();
+  }
 };
 </script>
 

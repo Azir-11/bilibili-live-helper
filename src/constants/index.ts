@@ -1,4 +1,5 @@
-const UP_INFO = {
+export const UP_INFO = {
+  all: "up_info",
   uid: "up_info.uid",
   cookie: "up_info.cookie",
   csrf: "up_info.csrf",
@@ -6,8 +7,6 @@ const UP_INFO = {
   avatar: "up_info.avatar",
   uname: "up_info.uname"
 };
-
-export { UP_INFO };
 
 export * from "./bilibili";
 export * from "./url";

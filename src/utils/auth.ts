@@ -1,10 +1,9 @@
-import { UP_INFO } from "@/constants";
-import { getStore } from "@/store/tauri";
+import { isLoginApi } from "@/api";
 
-const upIsLogin = async () =>
-  (await getStore(UP_INFO.uid)) &&
-  (await getStore(UP_INFO.cookie)) &&
-  (await getStore(UP_INFO.csrf));
+const upIsLogin = async () => {
+  const { isLogin } = await isLoginApi();
+  return isLogin;
+};
 
 const robotIsLogin = () => {};
 

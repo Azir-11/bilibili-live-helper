@@ -3,7 +3,7 @@ import type { WindowOptions } from "@tauri-apps/api/window";
 import type { Rewrite } from ".";
 
 export type Path =
-  | "/"
+  | "/main"
   | "/barrage"
   | "/fans"
   | "/music"

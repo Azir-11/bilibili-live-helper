@@ -1,6 +1,14 @@
 import { Body } from "@tauri-apps/api/http";
 import { getQueryData } from ".";
-import { BASE_URL_PREFIX, baseUserId, LOGIN_URL_PREFIX } from "@/constants";
+import { getStore } from "@/store/tauri";
+import {
+  BASE_URL_PREFIX,
+  baseUserId,
+  LOGIN_URL_PREFIX,
+  UP_INFO
+} from "@/constants";
+
+const cookie = (await getStore(UP_INFO.cookie)) || "";
 
 // 获取用户粉丝数量
 const getFansApi = async (uid?: string) =>
@@ -15,6 +23,15 @@ const getFansApi = async (uid?: string) =>
 const getUserInfoApi = async (mid: string) =>
   await getQueryData(`${BASE_URL_PREFIX}/x/space/acc/info`, {
     query: { mid, jsonp: "jsonp" }
+  });
+
+// 判断是否已登录
+const isLoginApi = async () =>
+  await getQueryData(`${BASE_URL_PREFIX}/x/web-interface/nav`, {
+    headers: {
+      cookie
+    },
+    returnError: true
   });
 
 // 获取 up 和用户关系信息
@@ -94,6 +111,7 @@ const getUpNewVideoInfoApi = async () => {
 export {
   getFansApi,
   getUserInfoApi,
+  isLoginApi,
   getRelationApi,
   getLoginUrlApi,
   verifyQrCodeApi,
