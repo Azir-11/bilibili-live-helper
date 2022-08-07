@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HelperSettings from "@/views/helper-settings/index.vue";
-import { settingsRoutes } from "./settings";
 import type { RouteRecordRaw } from "vue-router";
+import { settingsRoutes } from "./settings";
+import HelperSettings from "@/views/helper-settings/index.vue";
 import type { Route } from "@/types/router";
 
 export const routes: Route[] = [

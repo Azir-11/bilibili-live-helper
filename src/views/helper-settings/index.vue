@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
-import { settingsRoutes } from "@/router/settings";
 import type { RouteRecordRaw } from "vue-router";
 import type { MenuOption } from "naive-ui";
-import { closeWindow } from "@/utils/tauri";
 import { ask } from "@tauri-apps/api/dialog";
+import { closeWindow } from "@/utils/tauri";
+import { settingsRoutes } from "@/router/settings";
 import { APP_NAME, LOGOUT_CONFIRM } from "@/constants";
 
 const $route = useRoute();

@@ -1,6 +1,6 @@
 import { fetch } from "@tauri-apps/api/http";
-import { NaiveMessage } from "@/utils/navie";
 import type { FetchOptions } from "@tauri-apps/api/http";
+import { NaiveMessage } from "@/utils/navie";
 
 // 请求总入口
 const getQueryData = async (

@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import QRCode from "./component/QRCode.vue";
 import { getStore } from "@/store/tauri";
 import { closeWindow, openNewWindow } from "@/utils/tauri";
 import { CDN_URL } from "@/constants/url";
-import QRCode from "./component/QRCode.vue";
 
 const close = async () => {
   await openNewWindow("/");

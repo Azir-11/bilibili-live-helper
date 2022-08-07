@@ -1,6 +1,6 @@
 <script setup lang='ts'>
-import FlipItem from "./flip-item/index.vue";
 import { timeArr, startTimer, stopTimer } from "../initClock";
+import FlipItem from "./flip-item/index.vue";
 
 onMounted(() => startTimer());
 

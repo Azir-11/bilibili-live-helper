@@ -1,5 +1,5 @@
-import { getAvailWidth, getAvailHeight } from "@/utils/window";
 import type { WindowOptions } from "@tauri-apps/api/window";
+import { getAvailWidth, getAvailHeight } from "@/utils/window";
 import type { Path } from "@/types/router";
 
 const commonTitle = "直播助手-";

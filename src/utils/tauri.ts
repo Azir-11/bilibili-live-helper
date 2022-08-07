@@ -1,7 +1,7 @@
 import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
 import { writeText } from "@tauri-apps/api/clipboard";
-import { windowOptions } from "@/options/tauri";
 import { NaiveMessage } from "./navie";
+import { windowOptions } from "@/options/tauri";
 import type { Path } from "@/types/router";
 
 /**

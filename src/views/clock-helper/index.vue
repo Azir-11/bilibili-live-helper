@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { closeWindow } from "@/utils/tauri";
 import FlipClock from "./components/flip-clock/index.vue";
 import SimpleClock from "./components/simple-clock/index.vue";
+import { closeWindow } from "@/utils/tauri";
 
 const clock = shallowRef(null);
 

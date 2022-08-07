@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { open } from "@tauri-apps/api/shell";
+import { liveDuration, baseInfo } from "../";
 import { copyText } from "@/utils/tauri";
 
-import { liveDuration, baseInfo } from "../";
 </script>
 
 <template>

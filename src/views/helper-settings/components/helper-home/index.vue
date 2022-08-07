@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { getBaseInfo, baseInfo, liveStatus, changeLiveStatus } from ".";
-import { HOME_URL_PREFIX } from "@/constants";
-
 import OnLive from "./components/on-live.vue";
 import OffLive from "./components/off-live.vue";
+import { getBaseInfo, baseInfo, liveStatus, changeLiveStatus } from ".";
+import { HOME_URL_PREFIX } from "@/constants";
 
 let timer: ReturnType<typeof setInterval>;
 
