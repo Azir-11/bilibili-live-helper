@@ -58,6 +58,8 @@ const logout = async () => {
     await closeWindow();
   }
 };
+
+onMounted(() => closeWindow("splash-screen"));
 </script>
 
 <template>

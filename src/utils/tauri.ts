@@ -40,7 +40,14 @@ const minimizeWindow = () => appWindow.minimize();
 /**
  * 关闭当前窗口
  */
-const closeWindow = () => appWindow.close();
+const closeWindow = (label?: string) => {
+  if (label) {
+    const window = WebviewWindow.getByLabel(label);
+    window && window.close();
+  } else {
+    appWindow.close();
+  }
+};
 
 /**
  * 隐藏当前窗口

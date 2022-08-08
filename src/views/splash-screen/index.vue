@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import QRCode from "./qr-code.vue";
-import { closeWindow, openNewWindow } from "@/utils/tauri";
+import { openNewWindow } from "@/utils/tauri";
 import { upIsLogin, clearUpInfo } from "@/utils/auth";
 import {
   UP_INFO,
@@ -25,8 +25,6 @@ const uname = ref();
 // 进入主窗口
 const enterMainWindow = async () => {
   await openNewWindow("/");
-
-  await closeWindow();
 };
 
 // 切换账户
