@@ -94,30 +94,24 @@ const getUpNewVideoInfoApi = async () => {
 
 // 验证登录信息是否有效
 const validateLoginInfoApi = async () =>
-  await getQueryData("https://api.vc.bilibili.com/web_im/v1/web_im/send_msg", {
-    method: "POST",
-    body: Body.form({
-      "msg[sender_uid]": await getStore(UP_INFO.uid),
-      "msg[receiver_id]": "478490349",
-      "msg[receiver_type]": "1",
-      "msg[msg_status]": "0",
-      "msg[content]": "{\"content\":\"我在使用哔哩哔哩直播助手验证我的登录信息是否有效\"}",
-      "msg[timestamp]": parseInt(
-        new Date().getTime().toString().slice(0, 10)
-      ).toString(),
-      "msg[new_face_version]": "0",
-      "msg[dev_id]": "B4C069E1-4F7F-4300-919B-B2DBC77CB608",
-      from_firework: "0",
-      build: "0",
-      mobi_app: "web",
-      csrf_token: await getStore(UP_INFO.csrf),
-      csrf: await getStore(UP_INFO.csrf)
-    }),
-    headers: {
-      cookie: await getStore(UP_INFO.cookie)
-    },
-    returnError: true
-  });
+  await getQueryData(
+    "https://api.vc.bilibili.com/link_setting/v1/link_setting/get",
+    {
+      method: "POST",
+      body: Body.form({
+        msg_notify: "1",
+        show_unfollowed_msg: "1",
+        build: "0",
+        mobi_app: "web",
+        csrf_token: await getStore(UP_INFO.csrf),
+        csrf: await getStore(UP_INFO.csrf)
+      }),
+      headers: {
+        cookie: await getStore(UP_INFO.cookie)
+      },
+      returnError: true
+    }
+  );
 
 export {
   getFansApi,
