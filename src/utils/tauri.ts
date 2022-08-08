@@ -12,10 +12,13 @@ import type { Path } from "@/types/router";
 const openNewWindow = async (url: Path) => {
   // 找到与 url 匹配到相关路由信息
   const findRoute = routes.find(({ path }) => path === url);
+
+  if (!findRoute) return;
+
   // 窗口 label
-  const label = findRoute?.name!;
+  const label = findRoute.name;
   // 窗口 option
-  const option = findRoute?.meta?.tauriOption;
+  const option = findRoute.meta?.tauriOption;
 
   // 查找是否存在窗口 存在就显示并获取焦点 不存在则新建
   const newWindow = WebviewWindow.getByLabel(label);

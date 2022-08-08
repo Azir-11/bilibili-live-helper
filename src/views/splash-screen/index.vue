@@ -29,14 +29,19 @@ const enterMainWindow = async () => {
   await closeWindow();
 };
 
+// 切换账户
+const switchAccount = () => {
+  clearUpInfo();
+
+  hasLoginInfo.value = false;
+};
+
 // 验证登录信息
 const validateLoginInfo = async () => {
   const result = await validateLoginInfoApi();
 
   if (result.code) {
-    clearUpInfo();
-
-    hasLoginInfo.value = false;
+    switchAccount();
 
     NaiveMessage.error("登录信息已过期，请重新扫码登录");
 
@@ -77,6 +82,12 @@ provide("enterMainWindow", enterMainWindow);
       >
         进入直播助手
       </n-button>
+      <span
+        class="mt-6 cursor-pointer text-[#28ade3]"
+        @click="switchAccount"
+      >
+        切换帐号
+      </span>
     </template>
 
     <div

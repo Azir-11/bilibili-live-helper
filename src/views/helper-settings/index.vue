@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+import { ask } from "@tauri-apps/api/dialog";
 import type { RouteRecordRaw } from "vue-router";
 import type { MenuOption } from "naive-ui";
-import { ask } from "@tauri-apps/api/dialog";
 import { closeWindow, openNewWindow } from "@/utils/tauri";
 import { settingsRoutes } from "@/router/settings";
 import { APP_NAME, LOGOUT_CONFIRM } from "@/constants";
