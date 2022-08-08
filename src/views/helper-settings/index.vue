@@ -85,7 +85,7 @@ const logout = async () => {
           <KeepAlive>
             <component
               :is="Component"
-              class="p-1.5"
+              class="h-full p-1.5"
             />
           </KeepAlive>
         </RouterView>

@@ -2,8 +2,11 @@
 import QS from "qs";
 import QRCode from "qrcode";
 import { getLoginUrlApi, verifyQrCodeApi } from "@/api";
-import { LOADING_IMAGE, UP_INFO } from "@/constants";
+import { UP_INFO } from "@/constants";
 import { setStore } from "@/store/tauri";
+import Loading from "@/components/loading/index.vue";
+
+// const emit = defineEmits(["enter"]);
 
 // 进入主窗口的事件
 const enterMainWindow: any = inject("enterMainWindow");
@@ -86,9 +89,12 @@ onMounted(getQRCode);
 <template>
   <div class="relative h-40 w-40">
     <img
-      :src="qrCodeImage || LOADING_IMAGE"
+      :src="qrCodeImage"
       class="h-full w-full"
+      v-if="qrCodeImage"
     >
+
+    <Loading v-else />
 
     <n-result
       status="success"

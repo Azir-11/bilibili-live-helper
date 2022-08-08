@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import { confirm } from "@tauri-apps/api/dialog";
-import { getUserInfoApi } from "@/api/bilibili";
-import { getLiveStatusApi, changeLiveStatusApi } from "@/api";
+import { getUserInfoApi, getLiveStatusApi, changeLiveStatusApi } from "@/api";
 import { getStore, setStore } from "@/store/tauri";
 import { DEFAULT_AVATAR, UP_INFO } from "@/constants";
 

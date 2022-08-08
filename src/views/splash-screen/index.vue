@@ -7,8 +7,7 @@ import {
   CDN_URL,
   LOADING_IMAGE,
   DEFAULT_AVATAR,
-  APP_NAME,
-  DEFAULT_PINK_COLOR
+  APP_NAME
 } from "@/constants";
 import { getStore } from "@/store/tauri";
 import { validateLoginInfoApi } from "@/api";
@@ -76,8 +75,7 @@ provide("enterMainWindow", enterMainWindow);
       </div>
       <n-h4>{{ uname }}</n-h4>
       <n-button
-        type="primary"
-        :color="DEFAULT_PINK_COLOR"
+        type="info"
         class="mt-8"
         @click="validateLoginInfo"
       >
