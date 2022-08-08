@@ -38,6 +38,9 @@ onMounted(async () => {
 
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
-    <RouterView class="h-screen overflow-hidden rounded-xl" />
+    <RouterView
+      class="h-screen overflow-hidden rounded-xl"
+      @contextmenu.prevent
+    />
   </n-config-provider>
 </template>
