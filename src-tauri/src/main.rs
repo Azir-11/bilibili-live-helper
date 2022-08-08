@@ -25,7 +25,6 @@ fn main() {
   app.run(|_app_handle, _event| {});
 }
 
-
 // 打开窗口的调试工具
 #[tauri::command]
 fn open_devtools(window: Window) {

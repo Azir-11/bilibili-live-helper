@@ -1,8 +1,6 @@
 use tauri::{SystemTray, CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu,SystemTrayEvent,AppHandle, Manager};
 // use  tauri::api::dialog::message;
 
-
-
 // 加载菜单
 pub fn main_menu()-> SystemTray {
     let tray_menu = SystemTrayMenu::new()
@@ -21,8 +19,6 @@ pub fn main_menu()-> SystemTray {
 
     SystemTray::new().with_menu(tray_menu)
 }
-
-
 
 // 菜单事件
 pub fn handler(app: &AppHandle, event: SystemTrayEvent) {
@@ -45,6 +41,8 @@ let loading_menu =     SystemTrayMenu::new()
             size: _,
             ..
         } => {
+            println!("keys: {:?}", windows.keys());
+
             if main_flag{
                 let window = app.get_window("main").unwrap();
                 window.show().unwrap();

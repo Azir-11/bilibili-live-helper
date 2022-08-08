@@ -1,0 +1,7 @@
+const DEFAULT_PINK_COLOR = "#e1678e";
+
+const DEFAULT_BLUE_COLOR = "#28ade3";
+
+const DEFAULT_gold_COLOR = "#ffb027";
+
+export { DEFAULT_PINK_COLOR, DEFAULT_BLUE_COLOR, DEFAULT_gold_COLOR };

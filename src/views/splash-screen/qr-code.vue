@@ -103,7 +103,9 @@ onMounted(getQRCode);
       v-else-if="qrCodeStatus === 2"
     >
       <template #icon>
-        <n-icon class="i-carbon-renew text-blue rotate-90 text-4xl" />
+        <n-icon
+          class="i-carbon-renew text-[var(--blue-color)] rotate-90 text-4xl"
+        />
       </template>
     </n-result>
 

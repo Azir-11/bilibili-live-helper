@@ -7,7 +7,8 @@ import {
   CDN_URL,
   LOADING_IMAGE,
   DEFAULT_AVATAR,
-  APP_NAME
+  APP_NAME,
+  DEFAULT_PINK_COLOR
 } from "@/constants";
 import { getStore } from "@/store/tauri";
 import { validateLoginInfoApi } from "@/api";
@@ -76,14 +77,14 @@ provide("enterMainWindow", enterMainWindow);
       <n-h4>{{ uname }}</n-h4>
       <n-button
         type="primary"
-        color="#e1678e"
+        :color="DEFAULT_PINK_COLOR"
         class="mt-8"
         @click="validateLoginInfo"
       >
         进入直播助手
       </n-button>
       <span
-        class="mt-6 cursor-pointer text-[#28ade3]"
+        class="text-[var(--blue-color)] mt-6 cursor-pointer"
         @click="switchAccount"
       >
         切换帐号

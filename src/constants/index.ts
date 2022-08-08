@@ -13,3 +13,4 @@ export * from "./events";
 export * from "./store";
 export * from "./tip";
 export * from "./assets";
+export * from "./color";
