@@ -1,6 +1,7 @@
 import { Body } from "@tauri-apps/api/http";
 import { getQueryData } from ".";
-import { LIVE_URL_PREFIX, baseRoomId } from "@/constants";
+import { getStore } from "@/store/tauri";
+import { LIVE_URL_PREFIX, UP_INFO } from "@/constants";
 
 // 获取直播分类
 const getLiveCategoryApi = async () =>
@@ -12,11 +13,11 @@ const getLiveCategoryApi = async () =>
   );
 
 // 获取当前直播状态
-const getLiveStatusApi = async (roomid: number = baseRoomId) =>
+const getLiveStatusApi = async (room_ids: string) =>
   await getQueryData(
     `${LIVE_URL_PREFIX}/xlive/web-room/v1/index/getRoomBaseInfo`,
     {
-      query: { room_ids: "" + roomid, req_biz: "link-center" }
+      query: { room_ids, req_biz: "link-center" }
     }
   );
 
@@ -26,7 +27,7 @@ const getLiveLineApi = async () =>
     `${LIVE_URL_PREFIX}/xlive/app-blink/v1/live/getWebUpStreamAddr`,
     {
       query: { platform: "pc" },
-      headers: { cookie: "" }
+      headers: { cookie: await getStore(UP_INFO.cookie) }
     }
   );
 
@@ -37,14 +38,14 @@ const changeLiveStatusApi = async (liveStatus: boolean, area_v2?: string) =>
     {
       method: "POST",
       body: Body.json({
-        room_id: "",
+        room_id: await getStore(UP_INFO.room_id),
         platform: "pc",
         area_v2,
-        csrf_token: "",
-        csrf: ""
+        csrf_token: await getStore(UP_INFO.csrf),
+        csrf: await getStore(UP_INFO.csrf)
       }),
       headers: {
-        cookie: ""
+        cookie: await getStore(UP_INFO.cookie)
       }
     }
   );

@@ -3,7 +3,7 @@ import type { WindowOptions } from "@tauri-apps/api/window";
 import type { Rewrite } from ".";
 
 export type Path =
-  | "/main"
+  | "/"
   | "/barrage"
   | "/fans"
   | "/music"
@@ -15,6 +15,7 @@ export type Route = Rewrite<
   RouteRecordRaw,
   {
     path: Path;
+    name: string;
     meta?: {
       tauriOption: WindowOptions;
       [key: string]: any;

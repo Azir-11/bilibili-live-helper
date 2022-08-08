@@ -1,0 +1,9 @@
+import { CDN_URL } from ".";
+
+// 加载图片
+const LOADING_IMAGE = `${CDN_URL}/img/loading.gif`;
+
+// 默认头像
+const DEFAULT_AVATAR = `${CDN_URL}/img/no-avatar.jpeg`;
+
+export { LOADING_IMAGE, DEFAULT_AVATAR };

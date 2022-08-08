@@ -8,8 +8,8 @@ export const UP_INFO = {
   uname: "up_info.uname"
 };
 
-export * from "./bilibili";
 export * from "./url";
 export * from "./events";
 export * from "./store";
 export * from "./tip";
+export * from "./assets";

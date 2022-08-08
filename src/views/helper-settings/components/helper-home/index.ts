@@ -1,18 +1,15 @@
 import dayjs from "dayjs";
 import { confirm } from "@tauri-apps/api/dialog";
-
 import { getUserInfoApi } from "@/api/bilibili";
 import { getLiveStatusApi, changeLiveStatusApi } from "@/api";
-
-import { defatultAvatar } from "@/constants/bilibili";
 import { getStore, setStore } from "@/store/tauri";
-import { UP_INFO } from "@/constants";
+import { DEFAULT_AVATAR, UP_INFO } from "@/constants";
 
 const baseInfo = ref();
 
 // 通过userid获取用户基本信息和直播信息
 const getBaseInfo = async () => {
-  const userId = await getStore(UP_INFO.uid) as string;
+  const userId = (await getStore(UP_INFO.uid)) as string;
   const {
     name,
     face,
@@ -32,7 +29,7 @@ const getBaseInfo = async () => {
 
   baseInfo.value = {
     name,
-    face: face || defatultAvatar,
+    face: face || DEFAULT_AVATAR,
     num,
     ...liveInfo
   };

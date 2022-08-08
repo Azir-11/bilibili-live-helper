@@ -10,9 +10,12 @@ import type { Path } from "@/types/router";
  * @param url 窗口的路由地址
  */
 const openNewWindow = async (url: Path) => {
-  const label = url.replace("/", "");
+  // 找到与 url 匹配到相关路由信息
+  const findRoute = routes.find(({ path }) => path === url);
+  // 窗口 label
+  const label = findRoute?.name!;
   // 窗口 option
-  const option = routes.find(({ path }) => path === url)?.meta?.tauriOption;
+  const option = findRoute?.meta?.tauriOption;
 
   // 查找是否存在窗口 存在就显示并获取焦点 不存在则新建
   const newWindow = WebviewWindow.getByLabel(label);
@@ -35,14 +38,6 @@ const minimizeWindow = () => appWindow.minimize();
  * 关闭当前窗口
  */
 const closeWindow = () => appWindow.close();
-
-/**
- * 显示某个窗口
- */
-const showWindow = async (lable: string) => {
-  const window = await WebviewWindow.getByLabel(lable);
-  window && window.show();
-};
 
 /**
  * 隐藏当前窗口
@@ -73,7 +68,6 @@ export {
   openNewWindow,
   minimizeWindow,
   closeWindow,
-  showWindow,
   hideWindow,
   setWindowOnTop,
   copyText

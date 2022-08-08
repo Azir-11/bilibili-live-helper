@@ -25,14 +25,11 @@ const initStore = async () => {
 };
 
 // 获取 store 参数
-const getStore = async (key: string) => {
-  try {
-    return await store.get(key);
-  } catch (error) {}
-};
+const getStore = async (key: string): Promise<any> =>
+  (await store.get(key)) as any;
 
 // 设置 store 参数
-const setStore = async (key: string, value: any) => {
+const setStore = async (key: string, value: string | boolean) => {
   try {
     await store.set(key, value);
 
@@ -53,6 +50,8 @@ const saveStore = async () => {
 const deleteStore = async (key: string) => {
   try {
     await store.delete(key);
+
+    await saveStore();
   } catch (error) {}
 };
 
@@ -60,6 +59,8 @@ const deleteStore = async (key: string) => {
 const clearStore = async () => {
   try {
     await store.clear();
+
+    await saveStore();
   } catch (error) {}
 };
 

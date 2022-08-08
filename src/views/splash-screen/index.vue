@@ -1,41 +1,104 @@
 <script setup lang="ts">
-import QRCode from "./component/qr-code.vue";
-import Login from "./component/login.vue";
-import { hideWindow, openNewWindow } from "@/utils/tauri";
-import { upIsLogin } from "@/utils/auth";
-import { CDN_URL } from "@/constants/url";
+import QRCode from "./qr-code.vue";
+import { closeWindow, openNewWindow } from "@/utils/tauri";
+import { upIsLogin, clearUpInfo } from "@/utils/auth";
+import {
+  UP_INFO,
+  CDN_URL,
+  LOADING_IMAGE,
+  DEFAULT_AVATAR,
+  APP_NAME
+} from "@/constants";
+import { getStore } from "@/store/tauri";
+import { validateLoginInfoApi } from "@/api";
+import { NaiveMessage } from "@/utils/navie";
 
-// 初始化验证登录信息
-const loginStatus = ref<boolean>();
+// 初始化获取登录信息
+const hasLoginInfo = ref<boolean>();
 
-const laadingShow = ref<boolean>(true);
+// 头像
+const avatar = ref();
 
-watch(loginStatus, () => (laadingShow.value = false));
+// 名称
+const uname = ref();
 
 // 进入主窗口
 const enterMainWindow = async () => {
-  await hideWindow();
-  await openNewWindow("/main");
+  await openNewWindow("/");
+
+  await closeWindow();
+};
+
+// 验证登录信息
+const validateLoginInfo = async () => {
+  const result = await validateLoginInfoApi();
+
+  if (result.code) {
+    clearUpInfo();
+
+    hasLoginInfo.value = false;
+
+    NaiveMessage.error("登录信息已过期，请重新扫码登录");
+
+    return;
+  }
+
+  enterMainWindow();
 };
 
 onMounted(async () => {
-  loginStatus.value = await upIsLogin();
-  // TODO 这里需要增加一个定时器，去判断保存的信息是否已过期，可以间隔长一点5分钟一次
+  hasLoginInfo.value = !!(await upIsLogin());
+
+  if (hasLoginInfo.value) {
+    avatar.value = (await getStore(UP_INFO.avatar)) || DEFAULT_AVATAR;
+    uname.value = (await getStore(UP_INFO.uname)) || APP_NAME;
+  }
 });
+
+provide("enterMainWindow", enterMainWindow);
 </script>
 
 <template>
-  <div class="splash-screen p-15 relative flex h-screen flex-col items-center">
-    <img
-      :src="`${CDN_URL}/img/loading.gif`"
-      alt="logo"
-      v-if="laadingShow"
+  <div class="splash-screen relative flex h-screen flex-col items-center p-11">
+    <template v-if="hasLoginInfo">
+      <div class="h-[75px] w-[75px]">
+        <n-avatar
+          :src="avatar"
+          round
+          class="h-full w-full"
+        />
+      </div>
+      <n-h4>{{ uname }}</n-h4>
+      <n-button
+        type="primary"
+        color="#e1678e"
+        class="mt-8"
+        @click="validateLoginInfo"
+      >
+        进入直播助手
+      </n-button>
+    </template>
+
+    <div
+      class="w-full text-center"
+      v-else-if="hasLoginInfo === undefined"
     >
-    <component
-      :is="loginStatus ? Login : QRCode"
-      @enter-main-window="enterMainWindow"
-      v-else
-    />
+      <img
+        :src="LOADING_IMAGE"
+        class="w-[50%]"
+      >
+      <n-h4>正在初始化数据...</n-h4>
+    </div>
+
+    <template v-else>
+      <n-h4 class="m-0">
+        扫码登录
+      </n-h4>
+      <QRCode />
+      <n-p class="m-0">
+        请使用哔哩哔哩手机客户端
+      </n-p>
+    </template>
 
     <img
       :src="`${CDN_URL}/img/login-left.png`"
@@ -49,7 +112,9 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-.img {
-  @apply w-30  absolute bottom-0;
+.splash-screen {
+  .img {
+    @apply w-30  absolute bottom-0;
+  }
 }
 </style>

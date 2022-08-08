@@ -18,8 +18,8 @@ const commonOption: WindowOptions = {
 
 export const routes: Route[] = [
   {
-    path: "/main",
-    name: "settings",
+    path: "/",
+    name: "main",
     component: HelperSettings,
     children: settingsRoutes,
     meta: {

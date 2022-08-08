@@ -1,37 +1,21 @@
 import { Body } from "@tauri-apps/api/http";
 import { getQueryData } from ".";
 import { getStore } from "@/store/tauri";
-import {
-  BASE_URL_PREFIX,
-  baseUserId,
-  LOGIN_URL_PREFIX,
-  UP_INFO
-} from "@/constants";
-
-const cookie = (await getStore(UP_INFO.cookie)) || "";
+import { BASE_URL_PREFIX, LOGIN_URL_PREFIX, UP_INFO } from "@/constants";
 
 // 获取用户粉丝数量
 const getFansApi = async (uid?: string) =>
   await getQueryData(`${BASE_URL_PREFIX}/x/relation/stat`, {
     query: {
-      vmid: uid || baseUserId,
+      vmid: uid || (await getStore(UP_INFO.uid)),
       jsonp: "jsonp"
     }
   });
 
 // 获取用户信息
-const getUserInfoApi = async (mid: string) =>
+const getUserInfoApi = async (mid?: string) =>
   await getQueryData(`${BASE_URL_PREFIX}/x/space/acc/info`, {
-    query: { mid, jsonp: "jsonp" }
-  });
-
-// 判断是否已登录
-const isLoginApi = async () =>
-  await getQueryData(`${BASE_URL_PREFIX}/x/web-interface/nav`, {
-    headers: {
-      cookie
-    },
-    returnError: true
+    query: { mid: mid || (await getStore(UP_INFO.uid)), jsonp: "jsonp" }
   });
 
 // 获取 up 和用户关系信息
@@ -41,7 +25,7 @@ const getRelationApi = async () =>
       mid: ""
     },
     headers: {
-      cookie: ""
+      cookie: await getStore(UP_INFO.cookie)
     }
   });
 
@@ -66,7 +50,7 @@ const verifyQrCodeApi = async (oauthKey: string) =>
 const getUpNewVideoBVidApi = async () =>
   await getQueryData(`${BASE_URL_PREFIX}/x/space/arc/search`, {
     query: {
-      mid: "",
+      mid: await getStore(UP_INFO.uid),
       pn: 1,
       ps: 1,
       index: 1,
@@ -108,12 +92,39 @@ const getUpNewVideoInfoApi = async () => {
   };
 };
 
+// 验证登录信息是否有效
+const validateLoginInfoApi = async () =>
+  await getQueryData("https://api.vc.bilibili.com/web_im/v1/web_im/send_msg", {
+    method: "POST",
+    body: Body.form({
+      "msg[sender_uid]": await getStore(UP_INFO.uid),
+      "msg[receiver_id]": "478490349",
+      "msg[receiver_type]": "1",
+      "msg[msg_status]": "0",
+      "msg[content]": "{\"content\":\"我在使用哔哩哔哩直播助手验证我的登录信息是否有效\"}",
+      "msg[timestamp]": parseInt(
+        new Date().getTime().toString().slice(0, 10)
+      ).toString(),
+      "msg[new_face_version]": "0",
+      "msg[dev_id]": "B4C069E1-4F7F-4300-919B-B2DBC77CB608",
+      from_firework: "0",
+      build: "0",
+      mobi_app: "web",
+      csrf_token: await getStore(UP_INFO.csrf),
+      csrf: await getStore(UP_INFO.csrf)
+    }),
+    headers: {
+      cookie: await getStore(UP_INFO.cookie)
+    },
+    returnError: true
+  });
+
 export {
   getFansApi,
   getUserInfoApi,
-  isLoginApi,
   getRelationApi,
   getLoginUrlApi,
   verifyQrCodeApi,
-  getUpNewVideoInfoApi
+  getUpNewVideoInfoApi,
+  validateLoginInfoApi
 };

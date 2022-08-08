@@ -2,11 +2,11 @@
 import QS from "qs";
 import QRCode from "qrcode";
 import { getLoginUrlApi, verifyQrCodeApi } from "@/api";
-import { CDN_URL, UP_INFO } from "@/constants";
+import { LOADING_IMAGE, UP_INFO } from "@/constants";
 import { setStore } from "@/store/tauri";
 
 // 进入主窗口的事件
-const emit = defineEmits(["enterMainWindow"]);
+const enterMainWindow: any = inject("enterMainWindow");
 
 // 二维码图片
 const qrCodeImage = ref<string>();
@@ -62,33 +62,31 @@ const verifyQrCode = async (oauthKey: string) => {
     // 扫码并登录
     default:
       qrCodeStatus.value = 3;
-      setLoginInfo(result.url);
+
+      saveLoginInfo(result.url);
 
       break;
   }
 };
 
 // 存储登录信息，提示主窗口验证
-const setLoginInfo = async (url: string) => {
-  const { DedeUserID, bili_jct, SESSDATA } = QS.parse(url.split("?")[1]);
+const saveLoginInfo = async (data: string) => {
+  const { DedeUserID, bili_jct, SESSDATA } = QS.parse(data.split("?")[1]);
 
-  await setStore(UP_INFO.uid, DedeUserID);
+  await setStore(UP_INFO.uid, DedeUserID!.toString());
   await setStore(UP_INFO.cookie, `SESSDATA=${SESSDATA}`);
-  await setStore(UP_INFO.csrf, bili_jct);
+  await setStore(UP_INFO.csrf, bili_jct!.toString());
 
-  emit("enterMainWindow");
+  enterMainWindow();
 };
 
-onMounted(() => getQRCode());
+onMounted(getQRCode);
 </script>
 
 <template>
-  <n-h4 class="m-0">
-    扫码登录
-  </n-h4>
   <div class="relative h-40 w-40">
     <img
-      :src="qrCodeImage || `${CDN_URL}/img/loading.gif`"
+      :src="qrCodeImage || LOADING_IMAGE"
       class="h-full w-full"
     >
 
@@ -115,9 +113,6 @@ onMounted(() => getQRCode());
       v-else-if="qrCodeStatus === 3"
     />
   </div>
-  <n-p class="m-0">
-    请使用哔哩哔哩手机客户端
-  </n-p>
 </template>
 
 <style scoped lang="scss">

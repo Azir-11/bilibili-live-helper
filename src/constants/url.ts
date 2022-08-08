@@ -10,6 +10,9 @@ const LIVE_URL_PREFIX = "https://api.live.bilibili.com";
 // 小破站主页的 url 前缀
 const HOME_URL_PREFIX = "https://space.bilibili.com";
 
+// 小破站直播间的 url 前缀
+const ROOM_URL_PREFIX = "https://live.bilibili.com";
+
 // 音乐相关 api 前缀
 const MUSIC_URL_PREFIX = "https://music-node.vercel.app";
 
@@ -27,6 +30,7 @@ export {
   LOGIN_URL_PREFIX,
   LIVE_URL_PREFIX,
   HOME_URL_PREFIX,
+  ROOM_URL_PREFIX,
   MUSIC_URL_PREFIX,
   PLAY_MUSIC_URL_PREFIX,
   WEBSOCKET_URL,

@@ -23,22 +23,17 @@ export const settingsRoutes: RouteRecordRaw[] = [
         path: "anchor-info",
         name: "anchor-info",
         component: () =>
-          import(
-            "@/views/helper-settings/components/account-info/index.vue"
-          ),
+          import("@/views/helper-settings/components/anchor-info/index.vue"),
         meta: {
           title: "主播信息",
-          icon: "i-carbon-user",
-          isAnchor: true
+          icon: "i-carbon-user"
         }
       },
       {
         path: "manager-info",
         name: "manager-info",
         component: () =>
-          import(
-            "@/views/helper-settings/components/account-info/index.vue"
-          ),
+          import("@/views/helper-settings/components/manager-info/index.vue"),
         meta: {
           title: "管理信息",
           icon: "i-carbon-bot"
@@ -69,9 +64,7 @@ export const settingsRoutes: RouteRecordRaw[] = [
         path: "auto-reply",
         name: "auto-reply",
         component: () =>
-          import(
-            "@/views/helper-settings/components/auto-reply/index.vue"
-          ),
+          import("@/views/helper-settings/components/auto-reply/index.vue"),
         meta: {
           title: "自动回复",
           icon: "i-carbon-reply"
