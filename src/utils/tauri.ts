@@ -1,4 +1,5 @@
 import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
+import { invoke } from "@tauri-apps/api/tauri";
 import { writeText } from "@tauri-apps/api/clipboard";
 import { NaiveMessage } from "./navie";
 import { routes } from "@/router";
@@ -28,7 +29,7 @@ const openNewWindow = async (url: Path) => {
 
   // 查找是否存在窗口 存在就显示并获取焦点 不存在则新建
   const newWindow = WebviewWindow.getByLabel(label);
-  console.log("newWindow", newWindow);
+
   if (newWindow) {
     newWindow.show();
   } else {
@@ -45,19 +46,18 @@ const openNewWindow = async (url: Path) => {
 const minimizeWindow = () => appWindow.minimize();
 
 /**
- * 关闭当前窗口
+ * 关闭窗口
+ * @param label 窗口标签, 默认为当前窗口
  */
 const closeWindow = (url?: Path) => {
-  if (!url) {
-    appWindow.close();
-
-    return;
+  let label = appWindow.label;
+  if (url) {
+    const route = findRoute(url);
+    if (!route) return;
+    label = route.name;
   }
 
-  const route = findRoute(url);
-  if (!route) return;
-
-  WebviewWindow.getByLabel(route.name)?.close();
+  invoke("close_window", { label });
 };
 
 /**

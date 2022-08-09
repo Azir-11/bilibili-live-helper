@@ -53,7 +53,7 @@ const logout = async () => {
   if (confirm) {
     clearUpInfo();
 
-    await openNewWindow("/splash-screen");
+    openNewWindow("/splash-screen");
   }
 };
 
