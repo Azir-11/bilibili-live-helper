@@ -81,6 +81,16 @@ export const settingsRoutes: RouteRecordRaw[] = [
           title: "语音播报",
           icon: "i-carbon-volume-up"
         }
+      },
+      {
+        path: "/history-manage",
+        name: "history-manage",
+        component: () =>
+          import("@/views/helper-settings/components/history-manage/index.vue"),
+        meta: {
+          title: "弹幕历史",
+          icon: "i-carbon-update-now"
+        }
       }
     ]
   },

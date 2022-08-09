@@ -24,7 +24,7 @@ const writeInt = (
   }
 };
 
-export const encode = (string: string, op: number) => {
+const encode = (string: string, op: number) => {
   const data = textEncoder.encode(string);
   const packetLen = 16 + data.byteLength;
   const header = [0, 0, 0, 0, 0, 16, 0, 1, 0, 0, 0, op, 0, 0, 0, 1];
@@ -32,7 +32,7 @@ export const encode = (string: string, op: number) => {
   return new Uint8Array(header.concat(...data)).buffer;
 };
 
-export const decode = (blob: any) => {
+const decode = (blob: any) => {
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = (e: any) => {
@@ -49,10 +49,7 @@ export const decode = (blob: any) => {
         while (offset < buffer.length) {
           const packetLen = readInt(buffer, offset, 4);
           const headerLen = 16; // readInt(buffer,offset + 4,4)
-          const data = buffer.slice(
-            offset + headerLen,
-            offset + packetLen
-          );
+          const data = buffer.slice(offset + headerLen, offset + packetLen);
 
           let body;
           try {
@@ -87,3 +84,20 @@ export const decode = (blob: any) => {
     reader.readAsArrayBuffer(blob);
   });
 };
+
+// hex颜色转为指定透明度颜色
+const colorHexToRgba = (color: string, opacity: number) => {
+  if (color) {
+    color = color.toLowerCase();
+
+    const colorList = [];
+
+    for (let i = 1; i < 7; i += 2) {
+      colorList.push(parseInt("0x" + color.slice(i, i + 2)));
+    }
+
+    return `rgba(${colorList.join()}, ${opacity})`;
+  }
+};
+
+export { encode, decode, colorHexToRgba };
