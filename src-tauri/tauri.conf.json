@@ -17,6 +17,9 @@
       "fs": {
         "scope": ["**"]
       },
+      "globalShortcut": {
+        "all": false
+      },
       "http": {
         "all": true,
         "request": true,
