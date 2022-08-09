@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import QRCode from "./qr-code.vue";
-import { openNewWindow } from "@/utils/tauri";
+import { openNewWindow, closeWindow } from "@/utils/tauri";
 import { upIsLogin, clearUpInfo } from "@/utils/auth";
 import {
   UP_INFO,
@@ -56,6 +56,8 @@ onMounted(async () => {
     avatar.value = (await getStore(UP_INFO.avatar)) || DEFAULT_AVATAR;
     uname.value = (await getStore(UP_INFO.uname)) || APP_NAME;
   }
+
+  closeWindow("/");
 });
 
 provide("enterMainWindow", enterMainWindow);

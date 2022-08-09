@@ -1,27 +1,34 @@
 import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
-// import { WebviewWindow, appWindow } from "@tauri-apps/api";
 import { writeText } from "@tauri-apps/api/clipboard";
 import { NaiveMessage } from "./navie";
 import { routes } from "@/router";
 import type { Path } from "@/types/router";
 
 /**
+ *
+ * @param url 窗口的路由地址
+ * @returns 找到与 url 匹配到相关路由信息
+ */
+const findRoute = (url: Path) => routes.find(({ path }) => path === url);
+
+/**
  * 开启一个新的窗口
  * @param url 窗口的路由地址
  */
 const openNewWindow = async (url: Path) => {
-  // 找到与 url 匹配到相关路由信息
-  const findRoute = routes.find(({ path }) => path === url);
-
-  if (!findRoute) return;
+  const route = findRoute(url);
+  if (!route) {
+    return;
+  }
 
   // 窗口 label
-  const label = findRoute.name;
+  const label = route.name;
   // 窗口 option
-  const option = findRoute.meta?.tauriOption;
+  const option = route.meta?.tauriOption;
 
   // 查找是否存在窗口 存在就显示并获取焦点 不存在则新建
   const newWindow = WebviewWindow.getByLabel(label);
+  console.log("newWindow", newWindow);
   if (newWindow) {
     newWindow.show();
   } else {
@@ -40,13 +47,17 @@ const minimizeWindow = () => appWindow.minimize();
 /**
  * 关闭当前窗口
  */
-const closeWindow = (label?: string) => {
-  if (label) {
-    const window = WebviewWindow.getByLabel(label);
-    window && window.close();
-  } else {
+const closeWindow = (url?: Path) => {
+  if (!url) {
     appWindow.close();
+
+    return;
   }
+
+  const route = findRoute(url);
+  if (!route) return;
+
+  WebviewWindow.getByLabel(route.name)?.close();
 };
 
 /**

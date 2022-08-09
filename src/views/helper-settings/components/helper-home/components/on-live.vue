@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { open } from "@tauri-apps/api/shell";
-import { liveDuration, baseInfo } from "../";
+// import { liveDuration, anchorInfo } from "../hooks/index1";
 import { copyText } from "@/utils/tauri";
 
+defineProps(["anchorInfo"]);
 </script>
 
 <template>
@@ -13,23 +14,23 @@ import { copyText } from "@/utils/tauri";
     <template #cover>
       <div
         class="relative flex items-center justify-center hover:cursor-pointer"
-        @click="open(baseInfo?.live_url)"
+        @click="open(anchorInfo?.live_url)"
       >
         <n-icon
           class="i-carbon-play-filled text-revert absolute z-10 text-7xl text-[#fb7299] hover:text-8xl"
         />
         <img
-          :src="baseInfo?.cover"
+          :src="anchorInfo?.cover"
           class="opacity-85"
         >
       </div>
     </template>
     <template #header>
       <n-text>
-        {{ baseInfo?.title }}
+        {{ anchorInfo?.title }}
       </n-text>
       <n-tag size="small">
-        {{ baseInfo?.area_name }}
+        {{ anchorInfo?.area_name }}
       </n-tag>
     </template>
     <template #header-extra>
@@ -42,7 +43,7 @@ import { copyText } from "@/utils/tauri";
           <template #avatar>
             <n-icon class="i-carbon-fire" />
           </template>
-          {{ baseInfo?.online }}人气
+          {{ anchorInfo?.online }}人气
         </n-tag>
 
         <n-tag
@@ -53,19 +54,17 @@ import { copyText } from "@/utils/tauri";
           <template #avatar>
             <n-icon class="i-carbon-view-filled" />
           </template>
-          {{ baseInfo?.num }}人看过
+          {{ anchorInfo?.num }}人看过
         </n-tag>
       </n-space>
     </template>
-    <n-p v-html="baseInfo?.description" />
+    <n-p v-html="anchorInfo?.description" />
 
     <n-space justify="space-between">
       <n-text class="text-sm">
-        开播时间： {{ baseInfo?.live_time }}
+        开播时间： {{ anchorInfo?.live_time }}
       </n-text>
-      <n-text class="text-sm">
-        开播时长：{{ liveDuration }}
-      </n-text>
+      <!-- <n-text class="text-sm"> 开播时长：{{ liveDuration }} </n-text> -->
     </n-space>
     <n-input-group class="m-t-2">
       <n-input

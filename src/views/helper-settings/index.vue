@@ -54,12 +54,10 @@ const logout = async () => {
     clearUpInfo();
 
     await openNewWindow("/splash-screen");
-
-    await closeWindow();
   }
 };
 
-onMounted(() => closeWindow("splash-screen"));
+onMounted(() => closeWindow("/splash-screen"));
 </script>
 
 <template>

@@ -28,7 +28,7 @@ import { ROOM_URL_PREFIX } from "@/constants";
         </n-a>
         <n-a
           @click="copyText('22835031')"
-          class="pl-10"
+          class="ml-10"
         >
           复制ID
         </n-a>
@@ -42,7 +42,7 @@ import { ROOM_URL_PREFIX } from "@/constants";
         </n-a>
         <n-a
           @click="copyText(`${ROOM_URL_PREFIX}/22835031`)"
-          class="pl-10"
+          class="ml-10"
         >
           复制链接
         </n-a>

@@ -4,7 +4,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 import type { GlobalThemeOverrides } from "naive-ui";
 import { initStore } from "@/store/tauri";
 
-// 自定义主题
+// 自定义主题颜色
 const themeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: "#28ade3",

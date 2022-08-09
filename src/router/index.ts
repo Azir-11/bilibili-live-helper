@@ -26,13 +26,16 @@ export const routes: Route[] = [
       tauriOption: {
         title: "哔哩哔哩-直播助手",
         alwaysOnTop: true,
-        theme: "light"
+        theme: "light",
+        resizable: false,
+        fullscreen: false,
+        maximized: false
       }
     }
   },
   {
     path: "/splash-screen",
-    name: "splash-screen;",
+    name: "splash-screen",
     component: () => import("@/views/splash-screen/index.vue"),
     meta: {
       tauriOption: {

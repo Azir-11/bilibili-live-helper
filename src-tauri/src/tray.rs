@@ -24,7 +24,7 @@ pub fn main_menu()-> SystemTray {
 pub fn handler(app: &AppHandle, event: SystemTrayEvent) {
 
 // 托盘菜单
-let loading_menu =     SystemTrayMenu::new()
+let loading_menu = SystemTrayMenu::new()
 .add_item(CustomMenuItem::new("quit".to_string(), "Quit")); // 退出
 
 
@@ -32,6 +32,7 @@ let loading_menu =     SystemTrayMenu::new()
     let windows = app.windows();
     // 判断主窗口是否存在
     let main_flag = windows.contains_key("main");
+    let login_flag = windows.contains_key("splash-screen");
 
     // 匹配点击事件
     match event {
@@ -43,8 +44,12 @@ let loading_menu =     SystemTrayMenu::new()
         } => {
             println!("keys: {:?}", windows.keys());
 
-            if main_flag{
+            if main_flag {
                 let window = app.get_window("main").unwrap();
+                window.show().unwrap();
+                window.set_focus().unwrap();
+            }else if login_flag {
+                let window = app.get_window("splash-screen").unwrap();
                 window.show().unwrap();
                 window.set_focus().unwrap();
             }

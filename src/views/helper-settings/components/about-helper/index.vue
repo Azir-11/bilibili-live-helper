@@ -39,13 +39,13 @@ const contactDetails = [
     </n-p>
     <n-p>
       您在使用本软件的过程中遇到的任何问题，都可以在仓库提
-      <n-text type="success">
+      <n-text type="primary">
         issues
       </n-text>
       或者通过以下的联系方式联系到我们，我们会尽快解决，当然如果您有任何好玩的功能或者想法，也可以联系到我们，我们会尽可能帮助实现的！
     </n-p>
     <n-blockquote>
-      <n-ul class="indent-0 list-disc">
+      <n-ul class="list-disc indent-0">
         <n-li
           v-for="(item, index) in contactDetails"
           :key="index"
