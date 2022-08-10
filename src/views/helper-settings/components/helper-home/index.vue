@@ -2,11 +2,34 @@
 import { open } from "@tauri-apps/api/shell";
 import OnLive from "./components/on-live.vue";
 import OffLive from "./components/off-live.vue";
-import useAnchorInfo from "./hooks";
-import { HOME_URL_PREFIX, NOT_OPEN_LIVE_IMAGE } from "@/constants";
+import useAnchorInfo from "@/hooks/useAnchorInfo";
 import Loading from "@/components/loading/index.vue";
+import {
+  HOME_URL_PREFIX,
+  NOT_OPEN_LIVE_IMAGE,
+  ROOM_INFO_URL
+} from "@/constants";
 
-const { isOpenLive, isLoading, anchorInfo } = useAnchorInfo();
+const { isLoading, isOpenLive, hasRoomId, anchorInfo } = useAnchorInfo();
+
+// 错误标题
+const errorTitle = computed(() =>
+  hasRoomId
+    ? "获取直播间信息失败，请检查网络设置或刷新重试~"
+    : "你还没有开通直播间啦~"
+);
+
+// 错误按钮信息
+const errorButton = computed(() => (hasRoomId ? "刷新页面" : "去开通直播间"));
+
+// 错误的按钮事件
+const onError = () => {
+  if (hasRoomId.value) {
+    window.location.reload();
+  } else {
+    open(ROOM_INFO_URL);
+  }
+};
 </script>
 
 <template>
@@ -16,7 +39,7 @@ const { isOpenLive, isLoading, anchorInfo } = useAnchorInfo();
       v-if="!isOpenLive"
     >
       <n-h3 class="m-0">
-        你还没有开通直播间啦~
+        {{ errorTitle }}
       </n-h3>
       <div class="text-0 h-[240px] w-[240px]">
         <img
@@ -28,67 +51,52 @@ const { isOpenLive, isLoading, anchorInfo } = useAnchorInfo();
       <n-button
         type="info"
         size="large"
-        @click="
-          open('https://link.bilibili.com/p/center/index#/my-room/start-live')
-        "
+        @click="onError"
       >
-        去开通直播间
+        {{ errorButton }}
       </n-button>
     </div>
 
     <Loading
-      :width="130"
+      width="130"
       content="正在获取直播间数据..."
       v-else-if="isLoading"
     />
 
-    <n-card
-      :bordered="false"
+    <div
+      class="mb-5 flex items-center justify-between"
       v-else
     >
-      <template #header>
-        <n-space>
-          <n-avatar
-            :src="anchorInfo?.face"
-            size="large"
-            round
-          />
-          <n-space vertical>
-            <n-text class="text-xl">
-              <n-a
-                :href="`${HOME_URL_PREFIX}/${anchorInfo?.uid}`"
-                target="_blank"
-              >
-                {{ anchorInfo?.name }}
-              </n-a>
-              感谢使用本助手
-            </n-text>
-            <n-text
-              type="info"
-              class="text-sm"
-            >
-              当前关注 {{ anchorInfo?.follower }}
-            </n-text>
-          </n-space>
-        </n-space>
-      </template>
-      <template #header-extra>
-        <n-button
-          type="primary"
-          v-if="!anchorInfo?.liveStatus"
-        >
-          开启直播
-        </n-button>
-        <n-button
-          type="info"
-          v-else
-        >
-          正在直播
-        </n-button>
-      </template>
-      <n-collapse-transition>
-        <component :is="anchorInfo?.liveStatus ? OnLive : OffLive" />
-      </n-collapse-transition>
-    </n-card>
+      <div class="flex items-center gap-3">
+        <n-avatar
+          :src="anchorInfo?.face"
+          :size="70"
+          round
+        />
+        <div class="flex flex-col gap-2">
+          <n-a
+            :href="`${HOME_URL_PREFIX}/${anchorInfo?.uid}`"
+            target="_blank"
+            class="text-5"
+          >
+            {{ anchorInfo?.name }}
+          </n-a>
+
+          <n-text class="text-sm">
+            当前粉丝
+            <n-number-animation :to="anchorInfo?.follower" />
+          </n-text>
+        </div>
+      </div>
+
+      <n-button :type="anchorInfo?.liveStatus ? 'info' : 'primary'">
+        {{ anchorInfo?.liveStatus ? "关闭直播" : "开启直播" }}
+      </n-button>
+    </div>
+
+    <component
+      :is="anchorInfo?.liveStatus ? OnLive : OffLive"
+      :anchor-info="anchorInfo"
+    />
   </div>
 </template>

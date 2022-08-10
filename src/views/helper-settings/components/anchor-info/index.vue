@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { copyText } from "@/utils/tauri";
+import Typography from "@/components/typography/index.vue";
 import { ROOM_URL_PREFIX } from "@/constants";
 </script>
 
@@ -19,34 +19,18 @@ import { ROOM_URL_PREFIX } from "@/constants";
         </div>
       </template>
 
-      <n-p>
-        直播间 ID：<n-a
-          :href="`${ROOM_URL_PREFIX}/22835031`"
-          target="_blank"
-        >
-          22835031
-        </n-a>
-        <n-a
-          @click="copyText('22835031')"
-          class="ml-10"
-        >
-          复制ID
-        </n-a>
-      </n-p>
-      <n-p>
-        我的直播间链接：<n-a
-          :href="`${ROOM_URL_PREFIX}/22835031`"
-          target="_blank"
-        >
-          {{ ROOM_URL_PREFIX }}/22835031
-        </n-a>
-        <n-a
-          @click="copyText(`${ROOM_URL_PREFIX}/22835031`)"
-          class="ml-10"
-        >
-          复制链接
-        </n-a>
-      </n-p>
+      <Typography
+        linkable
+        label="直播间 ID"
+        content="22835031"
+        :link="`${ROOM_URL_PREFIX}/22835031`"
+      />
+
+      <Typography
+        linkable
+        label="我的直播间链接"
+        :content="`${ROOM_URL_PREFIX}/22835031`"
+      />
     </n-card>
 
     <n-card segmented />

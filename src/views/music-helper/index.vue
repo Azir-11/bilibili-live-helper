@@ -16,8 +16,8 @@
       <div
         class="operate absolute top-0 left-0 flex h-full w-full items-center justify-center bg-black/60 text-[30px] text-white/60 opacity-0 duration-300 group-hover:opacity-100"
       >
-        <i class="i-carbon-play-filled" />
-        <i class="i-carbon-play-filled-alt" />
+        <n-icon class="i-carbon-play-filled" />
+        <n-icon class="i-carbon-play-filled-alt" />
       </div>
     </div>
     <div

@@ -17,6 +17,9 @@ const useAnchorInfo = () => {
   // 是否开通直播间
   const isOpenLive = ref(true);
 
+  // 是否有 roomid
+  const hasRoomId = ref(false);
+
   // 主播信息
   const anchorInfo = ref<Record<string, any>>({});
 
@@ -59,6 +62,8 @@ const useAnchorInfo = () => {
     roomid = roomid.toString();
 
     setStore(UP_INFO.room_id, roomid);
+
+    hasRoomId.value = true;
 
     const liveInfoResult = await getLiveStatusApi(roomid);
     if (!liveInfoResult) {
@@ -114,6 +119,7 @@ const useAnchorInfo = () => {
   return {
     isLoading,
     isOpenLive,
+    hasRoomId,
     anchorInfo,
     changeLiveStatus
   };

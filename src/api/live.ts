@@ -22,11 +22,26 @@ const getLiveStatusApi = async (room_ids: string) =>
   );
 
 // 获取直播线路
-const getLiveLineApi = async () =>
+const getLiveStreamApi = async () =>
   await getQueryData(
     `${LIVE_URL_PREFIX}/xlive/app-blink/v1/live/getWebUpStreamAddr`,
     {
       query: { platform: "pc" },
+      headers: { cookie: await getStore(UP_INFO.cookie) }
+    }
+  );
+
+// 获取身份码
+const getLiveCodeApi = async () =>
+  await getQueryData(
+    `${LIVE_URL_PREFIX}/xlive/open-platform/v1/common/operationOnBroadcastCode`,
+    {
+      method: "POST",
+      body: Body.form({
+        action: "1",
+        csrf_token: await getStore(UP_INFO.csrf),
+        csrf: await getStore(UP_INFO.csrf)
+      }),
       headers: { cookie: await getStore(UP_INFO.cookie) }
     }
   );
@@ -135,7 +150,8 @@ const sendMessageApi = async () => {
 export {
   getLiveCategoryApi,
   getLiveStatusApi,
-  getLiveLineApi,
+  getLiveStreamApi,
+  getLiveCodeApi,
   changeLiveStatusApi,
   getGiftApi,
   getEmojiApi,

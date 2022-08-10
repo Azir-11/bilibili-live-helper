@@ -19,6 +19,10 @@ const MUSIC_URL_PREFIX = "https://music-node.vercel.app";
 // 播放音乐的 url 前缀
 const PLAY_MUSIC_URL_PREFIX = "http://music.163.com/song/media/outer";
 
+// 个人直播间信息地址
+const ROOM_INFO_URL =
+  "https://link.bilibili.com/p/center/index#/my-room/start-live";
+
 // 直播长链接地址
 const WEBSOCKET_URL = "ws://broadcastlv.chat.bilibili.com:2244/sub";
 
@@ -33,6 +37,7 @@ export {
   ROOM_URL_PREFIX,
   MUSIC_URL_PREFIX,
   PLAY_MUSIC_URL_PREFIX,
+  ROOM_INFO_URL,
   WEBSOCKET_URL,
   CDN_URL
 };

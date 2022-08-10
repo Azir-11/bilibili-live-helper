@@ -85,7 +85,7 @@ onMounted(() => closeWindow("/splash-screen"));
           <KeepAlive>
             <component
               :is="Component"
-              class="h-full p-1.5"
+              class="h-full p-[20px]"
             />
           </KeepAlive>
         </RouterView>

@@ -13,7 +13,22 @@ const themeOverrides: GlobalThemeOverrides = {
     infoColor: "#ed7099",
     infoColorHover: "#f092af",
     infoColorPressed: "#d75784",
-    infoColorSuppl: "#f092af"
+    infoColorSuppl: "#f092af",
+
+    successColor: "#50b142",
+    successColorHover: "#5ec055",
+    successColorPressed: "#44983b",
+    successColorSuppl: "#5ec055",
+
+    warningColor: "#ef8432",
+    warningColorHover: "#f19f48",
+    warningColorPressed: "#c46626",
+    warningColorSuppl: "#f19f48",
+
+    errorColor: "#e24f48",
+    errorColorHover: "#e66e66",
+    errorColorPressed: "#bb3835",
+    errorColorSuppl: "#e66e66"
   }
 };
 

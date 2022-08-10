@@ -3,8 +3,8 @@ import { LOADING_IMAGE } from "@/constants";
 
 defineProps({
   width: {
-    type: Number,
-    default: 100
+    type: String,
+    default: "100"
   },
   content: {
     type: String,
@@ -18,7 +18,9 @@ defineProps({
     <img
       :src="LOADING_IMAGE"
       alt="loading"
-      :width="width"
+      :style="{
+        width: isNaN(Number(width)) ? width : width + 'px',
+      }"
     >
 
     <n-h4 v-if="content">

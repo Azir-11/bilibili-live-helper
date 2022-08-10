@@ -22,7 +22,7 @@ const options = [
 </script>
 
 <template>
-  <n-card>
+  <n-card embedded>
     <n-grid :cols="options.length">
       <n-gi
         v-for="item of options"
@@ -39,5 +39,3 @@ const options = [
     </template>
   </n-card>
 </template>
-
-<style lang="scss" scoped></style>

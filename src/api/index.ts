@@ -14,12 +14,17 @@ const getQueryData = async (
   >
 ) => {
   try {
-    const { method, returnError } = options;
+    const { method, returnError, headers } = options;
 
     const { data: response }: Record<string, any> = await fetch(url, {
       ...options,
       method: method || "GET",
-      timeout: 1000 * 60
+      timeout: 1000 * 60,
+      headers: {
+        ...headers,
+        "user-agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
+      }
     });
 
     if (returnError || response?.code === 0 || response?.code === 200) {

@@ -80,6 +80,8 @@ const copyText = async (text: string) => {
     await writeText(text);
 
     NaiveMessage.success("复制成功");
+
+    return true;
   } catch (error) {
     NaiveMessage.error("复制失败");
   }
