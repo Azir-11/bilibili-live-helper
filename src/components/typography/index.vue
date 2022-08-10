@@ -53,11 +53,11 @@ const copyContent = async () => {
 
 // 监听是否已复制，已复制图标 3s 变为未复制图标
 watch(isCopy, (newValue) => {
-  if (newValue) {
-    setTimeout(() => {
-      isCopy.value = false;
-    }, 1000 * 3);
-  }
+  if (!newValue) return;
+
+  setTimeout(() => {
+    isCopy.value = false;
+  }, 1000 * 3);
 });
 </script>
 
