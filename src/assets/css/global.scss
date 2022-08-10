@@ -1,26 +1,6 @@
 @import "./reset.scss";
 @import "./theme.scss";
 
-@font-face {
-  font-family: HarmonyOS;
-
-  src: url("https://cdn.jsdelivr.net/gh/bilibili-ayang/bilibili-live-helper-cdn@1.1/font/HarmonyOS.woff2")
-      format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/bilibili-ayang/bilibili-live-helper-cdn@1.1/font/HarmonyOS.woff")
-      format("woff"),
-    url("https://cdn.jsdelivr.net/gh/bilibili-ayang/bilibili-live-helper-cdn@1.1/font/HarmonyOS.ttf");
-  font-display: auto;
-}
-
-@font-face {
-  font-family: number;
-
-  src: url("https://cdn.jsdelivr.net/gh/bilibili-ayang/bilibili-live-helper-cdn@1.1/font/DIGIT.woff2")
-      format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/bilibili-ayang/bilibili-live-helper-cdn@1.1/font/DS-DIGIT.TTF");
-  font-display: auto;
-}
-
 * {
   &::-webkit-scrollbar {
     width: 5px;

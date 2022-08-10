@@ -29,6 +29,16 @@ const WEBSOCKET_URL = "ws://broadcastlv.chat.bilibili.com:2244/sub";
 // CDN 地址
 const CDN_URL = "https://font.ayangweb.cn";
 
+// CDN 图片地址
+const IMAGE_CDN_URL = `${CDN_URL}/img`;
+
+// CDN 字体地址
+const FONT_CDN_URL =
+  "https://cdn.jsdelivr.net/gh/bilibili-ayang/bilibili-live-helper-cdn@1.0/font";
+
+// CDN 音频地址
+const AUDIO_CDN_URL = `${CDN_URL}/audio`;
+
 export {
   BASE_URL_PREFIX,
   LOGIN_URL_PREFIX,
@@ -39,5 +49,8 @@ export {
   PLAY_MUSIC_URL_PREFIX,
   ROOM_INFO_URL,
   WEBSOCKET_URL,
-  CDN_URL
+  CDN_URL,
+  IMAGE_CDN_URL,
+  FONT_CDN_URL,
+  AUDIO_CDN_URL
 };

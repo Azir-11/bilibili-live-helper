@@ -4,7 +4,7 @@ import { closeWindow, openNewWindow } from "@/utils/tauri";
 import { upIsLogin, clearUpInfo } from "@/utils/auth";
 import {
   UP_INFO,
-  CDN_URL,
+  IMAGE_CDN_URL,
   LOADING_IMAGE,
   DEFAULT_AVATAR,
   APP_NAME
@@ -109,11 +109,11 @@ provide("enterMainWindow", enterMainWindow);
     </template>
 
     <img
-      :src="`${CDN_URL}/img/login-left.png`"
+      :src="`${IMAGE_CDN_URL}/login-left.png`"
       class="img left-0"
     >
     <img
-      :src="`${CDN_URL}/img/login-right.png`"
+      :src="`${IMAGE_CDN_URL}/login-right.png`"
       class="img right-0"
     >
   </div>

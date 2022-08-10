@@ -1,31 +1,31 @@
-import { CDN_URL } from ".";
+import { IMAGE_CDN_URL } from ".";
 
 // 加载图片
-const LOADING_IMAGE = `${CDN_URL}/img/loading.gif`;
+const LOADING_IMAGE = `${IMAGE_CDN_URL}/loading.gif`;
 
 // 默认头像
-const DEFAULT_AVATAR = `${CDN_URL}/img/no-avatar.jpeg`;
+const DEFAULT_AVATAR = `${IMAGE_CDN_URL}/no-avatar.jpeg`;
 
 // 未开通直播间
-const NOT_OPEN_LIVE_IMAGE = `${CDN_URL}/img/not-open-live.png`;
+const NOT_OPEN_LIVE_IMAGE = `${IMAGE_CDN_URL}/not-open-live.png`;
 
 // 总督
-const GOVERNOR_IMAGE = `${CDN_URL}/img/governor.png`;
+const GOVERNOR_IMAGE = `${IMAGE_CDN_URL}/governor.png`;
 
 // 提督
-const ADMIRAL_IMAGE = `${CDN_URL}/img/admiral.png`;
+const ADMIRAL_IMAGE = `${IMAGE_CDN_URL}/admiral.png`;
 
 // 舰长
-const CAPTAIN_IMAGE = `${CDN_URL}/img/captain.png`;
+const CAPTAIN_IMAGE = `${IMAGE_CDN_URL}/captain.png`;
 
 // 第一名
-const RANK1_IMAGE = `${CDN_URL}/img/rank-1.png`;
+const RANK1_IMAGE = `${IMAGE_CDN_URL}/rank-1.png`;
 
 // 第二名
-const RANK2_IMAGE = `${CDN_URL}/img/rank-2.png`;
+const RANK2_IMAGE = `${IMAGE_CDN_URL}/rank-2.png`;
 
 // 第三名
-const RANK3_IMAGE = `${CDN_URL}/img/rank-3.png`;
+const RANK3_IMAGE = `${IMAGE_CDN_URL}/rank-3.png`;
 
 export {
   LOADING_IMAGE,
