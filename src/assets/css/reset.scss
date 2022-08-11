@@ -1,8 +1,16 @@
 *,
 *::before,
 *::after {
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  line-height: 1.15;
+
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body,
@@ -19,24 +27,24 @@ figure,
 blockquote,
 dl,
 dd {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 ul,
 ol {
-	list-style: none;
+  list-style: none;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 i,
 em {
-	font-style: normal;
+  font-style: normal;
 }
 
 html:focus-within {
-	scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }

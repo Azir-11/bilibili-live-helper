@@ -1,7 +1,7 @@
 import { emit } from "@tauri-apps/api/event";
 import { ask } from "@tauri-apps/api/dialog";
 import dayjs from "dayjs";
-import { FANS_COUNT_EVENT, UP_INFO } from "@/constants";
+import { FANS_COUNT_EVENT, UP_INFO, APP_NAME } from "@/constants";
 import {
   getFansApi,
   getUserInfoApi,
@@ -96,7 +96,7 @@ const useAnchorInfo = () => {
       : "确定要开启直播吗？";
 
     const onAsk = await ask(message, {
-      title: "Bilibili-直播助手",
+      title: APP_NAME,
       type: "warning"
     });
 

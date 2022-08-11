@@ -1,3 +1,5 @@
+import { Path } from "@/types/router";
+
 export const UP_INFO = {
   uid: "up_info.uid",
   cookie: "up_info.cookie",
@@ -21,6 +23,16 @@ export const MESSAGE_TYPE = {
   LIVECLOSE: "LIVE",
   REDPACKET: "POPULARITY_RED_POCKET_NEW",
   WATCHCHANGE: "WATCHED_CHANGE"
+};
+
+export const IS_TOP: Record<Path, string> = {
+  "/": "is_top.settings",
+  "/barrage": "is_top.barrage",
+  "/clock": "is_top.clock",
+  "/fans": "is_top.fans",
+  "/music": "is_top.music",
+  "/prompt": "is_top.prompt",
+  "/splash-screen": "is_top.splash-screen"
 };
 
 export const VOICE_BROADCAST = "voice_broadcast";

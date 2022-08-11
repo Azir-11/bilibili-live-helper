@@ -78,7 +78,7 @@ const onError = () => {
             <n-a
               :href="`${HOME_URL_PREFIX}/${anchorInfo?.uid}`"
               target="_blank"
-              class="text-5"
+              class="text-5 font-bold"
             >
               {{ anchorInfo?.name }}
             </n-a>

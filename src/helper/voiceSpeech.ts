@@ -110,10 +110,10 @@ const playSpeech = () => {
       const speech = new SpeechSynthesisUtterance();
 
       speech.text = speechList.value.shift()?.str || "";
-      speech.voice =
-        voiceList.find(
-          (voice) => voice.value === speechConfig.value.speechVoice
-        )?.origin || voiceList[0].origin;
+      // speech.voice =
+      //   voiceList.find(
+      //     (voice) => voice.value === speechConfig.value.speechVoice
+      //   )?.origin || voiceList[0].origin;
 
       speech.rate = speechConfig.value.rate; // 语速
       speech.volume = speechConfig.value.volume / 100; // 音量

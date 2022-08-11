@@ -28,9 +28,6 @@ const OPEN_WEBSOCKET_EVENT = "open-websocket";
 // 关闭长链接事件名称
 const CLOSE_WEBSOCKET_EVENT = "close-websocket";
 
-// 解禁路由菜单事件名称
-const UNBANNING_ROUTER_MENU_EVENT = "unbanning-router-menu";
-
 export {
   FANS_COUNT_EVENT,
   WELCOME_EVENT,
@@ -41,6 +38,5 @@ export {
   SUPER_CHAT_EVENT,
   OPEN_WEBSOCKET_EVENT,
   WATCHED_CHANGE_EVENT,
-  CLOSE_WEBSOCKET_EVENT,
-  UNBANNING_ROUTER_MENU_EVENT
+  CLOSE_WEBSOCKET_EVENT
 };
