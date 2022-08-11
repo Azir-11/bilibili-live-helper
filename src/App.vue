@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { GlobalThemeOverrides } from "naive-ui";
 import { initStore } from "@/store/tauri";
+import Loading from "@/components/loading/index.vue";
 
 // 自定义主题颜色
 const themeOverrides: GlobalThemeOverrides = {
@@ -40,9 +41,15 @@ onMounted(async () => {
 
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
-    <RouterView
-      class="h-screen overflow-hidden rounded-xl"
-      @contextmenu.prevent
-    />
+    <Suspense>
+      <RouterView
+        class="h-screen overflow-hidden rounded-xl"
+        @contextmenu.prevent
+      />
+
+      <template #fallback>
+        <Loading content="loading..." />
+      </template>
+    </Suspense>
   </n-config-provider>
 </template>

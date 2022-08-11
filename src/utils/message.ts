@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 import { emit } from "@tauri-apps/api/event";
-import { MESSAGE_TYPE, UP_INFO, WATCHEDCHANGE_EVENT } from "@/constants";
+import { MESSAGE_TYPE, UP_INFO, WATCHED_CHANGE_EVENT } from "@/constants";
 import { getStore } from "@/store/tauri";
 import { colorHexToRgba } from "@/utils/socket";
 
@@ -74,7 +74,7 @@ const handleMessage = async (messages: any[]) => {
 
       // 观看人数更新
       case MESSAGE_TYPE.WATCHCHANGE:
-        await emit(WATCHEDCHANGE_EVENT, { num: message?.data?.num });
+        await emit(WATCHED_CHANGE_EVENT, { num: message?.data?.num });
         break;
     }
   };

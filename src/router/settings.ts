@@ -26,7 +26,8 @@ export const settingsRoutes: RouteRecordRaw[] = [
           import("@/views/helper-settings/components/anchor-info/index.vue"),
         meta: {
           title: "主播信息",
-          icon: "i-carbon-user"
+          icon: "i-carbon-user",
+          defaultDisabled: true
         }
       },
       {

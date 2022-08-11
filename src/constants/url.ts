@@ -14,7 +14,7 @@ const HOME_URL_PREFIX = "https://space.bilibili.com";
 const ROOM_URL_PREFIX = "https://live.bilibili.com";
 
 // 音乐相关 api 前缀
-const MUSIC_URL_PREFIX = "https://music-node.vercel.app";
+const MUSIC_URL_PREFIX = "https://music.ayangweb.cn/";
 
 // 播放音乐的 url 前缀
 const PLAY_MUSIC_URL_PREFIX = "http://music.163.com/song/media/outer";

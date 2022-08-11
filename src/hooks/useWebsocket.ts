@@ -7,7 +7,7 @@ import {
   RANK_EVENT,
   GIFT_EVENT,
   WELCOME_EVENT,
-  SUPERCHAT_EVENT,
+  SUPER_CHAT_EVENT,
   OPEN_WEBSOCKET_EVENT,
   CLOSE_WEBSOCKET_EVENT
 } from "@/constants";
@@ -93,7 +93,7 @@ const useWebsocket = () => {
     rankList.length && emit(RANK_EVENT, rankList);
     giftList.length && emit(GIFT_EVENT, giftList);
     welcomeList.length && emit(WELCOME_EVENT, welcomeList);
-    superChatList.length && emit(SUPERCHAT_EVENT, superChatList);
+    superChatList.length && emit(SUPER_CHAT_EVENT, superChatList);
   };
 
   const trigger = async () => {

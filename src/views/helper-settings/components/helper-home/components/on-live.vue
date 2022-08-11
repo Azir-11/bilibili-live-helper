@@ -87,4 +87,52 @@ onMounted(getLiveStream);
       </div>
     </n-spin>
   </n-card>
+
+  <n-card
+    class="mt-5 overflow-hidden"
+    hoverable
+    :content-style="{ overflow: 'hidden', padding: 0 }"
+  >
+    <iframe
+      style="width: 100%; height: 320px"
+      :src="`https://www.bilibili.com/blackboard/live/live-activity-player.html?cid=${anchorInfo?.room_id}&quality=0`"
+      frameborder="no"
+      framespacing="0"
+      scrolling="no"
+      allow="autoplay; encrypted-media"
+      allowfullscreen="true"
+    />
+
+    <div class="flex flex-col gap-4 p-4">
+      <n-text>{{ anchorInfo?.title }}</n-text>
+      <n-text type="primary">
+        {{ anchorInfo?.parent_area_name }} · {{ anchorInfo?.area_name }}
+      </n-text>
+      <n-text>开播时间：{{ anchorInfo?.live_time }}</n-text>
+      <div class="flex gap-4">
+        <n-tag
+          round
+          :bordered="false"
+          type="info"
+          size="small"
+        >
+          <template #icon>
+            <n-icon class="i-carbon-fire" />
+          </template>
+          {{ anchorInfo?.online }}人气
+        </n-tag>
+        <n-tag
+          round
+          :bordered="false"
+          type="primary"
+          size="small"
+        >
+          <template #icon>
+            <n-icon class="i-carbon-view" />
+          </template>
+          {{ anchorInfo?.num }}人看过
+        </n-tag>
+      </div>
+    </div>
+  </n-card>
 </template>

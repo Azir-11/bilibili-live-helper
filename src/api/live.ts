@@ -47,12 +47,15 @@ const getLiveCodeApi = async () =>
   );
 
 // 开始直播 or 停止直播
-const changeLiveStatusApi = async (liveStatus: boolean, area_v2?: string) =>
+const changeLiveStatusApi = async (
+  liveStatus: boolean,
+  area_v2: string = "372"
+) =>
   await getQueryData(
     `${LIVE_URL_PREFIX}/room/v1/Room/${!liveStatus ? "startLive" : "stopLive"}`,
     {
       method: "POST",
-      body: Body.json({
+      body: Body.form({
         room_id: await getStore(UP_INFO.room_id),
         platform: "pc",
         area_v2,

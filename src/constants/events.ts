@@ -17,16 +17,19 @@ const RANK_EVENT = "rank-message";
 const POPULARITY_EVENT = "popularity";
 
 // SC超级弹幕事件分发名称
-const SUPERCHAT_EVENT = "sc-message";
+const SUPER_CHAT_EVENT = "sc-message";
 
 // 直播间观看人次更新事件分发名称
-const WATCHEDCHANGE_EVENT = "watched-change";
+const WATCHED_CHANGE_EVENT = "watched-change";
 
 // 开启长链接事件名称
 const OPEN_WEBSOCKET_EVENT = "open-websocket";
 
 // 关闭长链接事件名称
 const CLOSE_WEBSOCKET_EVENT = "close-websocket";
+
+// 解禁路由菜单事件名称
+const UNBANNING_ROUTER_MENU_EVENT = "unbanning-router-menu";
 
 export {
   FANS_COUNT_EVENT,
@@ -35,8 +38,9 @@ export {
   POPULARITY_EVENT,
   BARRAGE_MESSAGE_EVENT,
   GIFT_EVENT,
-  SUPERCHAT_EVENT,
+  SUPER_CHAT_EVENT,
   OPEN_WEBSOCKET_EVENT,
-  WATCHEDCHANGE_EVENT,
-  CLOSE_WEBSOCKET_EVENT
+  WATCHED_CHANGE_EVENT,
+  CLOSE_WEBSOCKET_EVENT,
+  UNBANNING_ROUTER_MENU_EVENT
 };

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Typography from "@/components/typography/index.vue";
-import { ROOM_URL_PREFIX } from "@/constants";
+import { useAnchorInfoStore } from "@/store/pinia/anchorInfo";
+
+const { anchorInfo } = storeToRefs(useAnchorInfoStore());
 </script>
 
 <template>
@@ -12,24 +14,25 @@ import { ROOM_URL_PREFIX } from "@/constants";
       <template #header>
         <div class="flex items-center gap-[10px]">
           <n-avatar
+            :src="anchorInfo?.face"
             :size="50"
             round
           />
-          阿阳热爱前端
+          {{ anchorInfo?.name }}
         </div>
       </template>
 
       <Typography
         linkable
         label="直播间 ID"
-        content="22835031"
-        :link="`${ROOM_URL_PREFIX}/22835031`"
+        :content="anchorInfo?.roomid"
+        :link="anchorInfo?.live_url"
       />
 
       <Typography
         linkable
         label="我的直播间链接"
-        :content="`${ROOM_URL_PREFIX}/22835031`"
+        :content="anchorInfo?.live_url"
       />
     </n-card>
 

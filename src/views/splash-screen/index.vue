@@ -14,13 +14,13 @@ import { validateLoginInfoApi } from "@/api";
 import { NaiveMessage } from "@/utils/navie";
 
 // 初始化获取登录信息
-const hasLoginInfo = ref<boolean>();
+const hasLoginInfo = ref<boolean>(!!(await upIsLogin()));
 
 // 头像
-const avatar = ref();
+const avatar = ref((await getStore(UP_INFO.avatar)) || DEFAULT_AVATAR);
 
 // 名称
-const uname = ref();
+const uname = ref((await getStore(UP_INFO.uname)) || APP_NAME);
 
 // 进入主窗口
 const enterMainWindow = () => openNewWindow("/");
@@ -47,14 +47,7 @@ const validateLoginInfo = async () => {
   enterMainWindow();
 };
 
-onMounted(async () => {
-  hasLoginInfo.value = !!(await upIsLogin());
-
-  if (hasLoginInfo.value) {
-    avatar.value = (await getStore(UP_INFO.avatar)) || DEFAULT_AVATAR;
-    uname.value = (await getStore(UP_INFO.uname)) || APP_NAME;
-  }
-
+onMounted(() => {
   closeWindow("/");
 });
 
