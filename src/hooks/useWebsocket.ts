@@ -97,8 +97,8 @@ const useWebsocket = () => {
   };
 
   const trigger = async () => {
-    await listen(OPEN_WEBSOCKET_EVENT, (event) => {
-      const { room_id } = JSON.parse(event.payload as string);
+    await listen<string>(OPEN_WEBSOCKET_EVENT, (event) => {
+      const { room_id } = JSON.parse(event.payload);
       openWebsocket(room_id);
     });
     await listen(CLOSE_WEBSOCKET_EVENT, closeWebsocket);

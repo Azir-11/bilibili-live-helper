@@ -62,7 +62,7 @@ onMounted(getLiveStream);
       <div class="flex flex-col gap-5">
         <n-radio-group
           default-value="addr"
-          @update-value="(value) => (streamType = value)"
+          @update-value="(value:any) => (streamType = value)"
         >
           <n-radio value="addr">
             rtmp 地址

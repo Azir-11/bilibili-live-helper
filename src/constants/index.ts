@@ -23,6 +23,8 @@ export const MESSAGE_TYPE = {
   WATCHCHANGE: "WATCHED_CHANGE"
 };
 
+export const VOICE_BROADCAST = "voice_broadcast";
+
 export * from "./url";
 export * from "./events";
 export * from "./store";
