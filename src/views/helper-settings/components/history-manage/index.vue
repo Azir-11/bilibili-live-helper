@@ -2,8 +2,9 @@
 import { emit, listen } from "@tauri-apps/api/event";
 import * as EVENTS from "@/constants/events";
 import useWebsocket from "@/hooks/useWebsocket";
+import { openNewWindow } from "@/utils/tauri";
 
-const roomid = ref(23817749);
+const roomid = ref("23817749");
 const connected = ref(false);
 
 const stopWebsocket = () => {
@@ -13,7 +14,7 @@ const stopWebsocket = () => {
 
 const startWebsocket = async () => {
   connected.value = true;
-  emit(EVENTS.OPEN_WEBSOCKET_EVENT, { room_id: roomid.value });
+  emit(EVENTS.OPEN_WEBSOCKET_EVENT, { room_id: Number(roomid.value) });
 };
 
 const listeners: any[] = [];
@@ -37,6 +38,13 @@ const changeEvent = async (event: string) => {
   listeners.push(cur_listner);
 };
 
+const openPreview = async () => {
+  await openNewWindow("/preview");
+  setTimeout(() => {
+    emit("preview-room", roomid.value);
+  }, 2000);
+};
+
 onMounted(async () => {
   // 挂载websocket监听
   useWebsocket().trigger();
@@ -51,7 +59,7 @@ onMounted(async () => {
         connected ? "已连接" : "未连接"
       }}</span>
     </n-h3>
-    <n-input-number
+    <n-input
       v-model:value="roomid"
       placeholder="直播间id"
     />
@@ -66,6 +74,9 @@ onMounted(async () => {
       :disabled="!connected"
     >
       停止链接
+    </n-button>
+    <n-button @click="openPreview">
+      直播预览
     </n-button>
     <div class="m-4">
       <n-h3>

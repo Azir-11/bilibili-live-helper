@@ -150,6 +150,16 @@ const sendMessageApi = async () => {
   // });
 };
 
+// 获取直播视频流
+const getLiveStreamUrlApi = async (room_id: string) =>
+  await getQueryData(`${LIVE_URL_PREFIX}/room/v1/Room/playUrl`, {
+    query: {
+      cid: room_id,
+      qn: "0",
+      platform: "web"
+    }
+  });
+
 export {
   getLiveCategoryApi,
   getLiveStatusApi,
@@ -158,5 +168,6 @@ export {
   changeLiveStatusApi,
   getGiftApi,
   getEmojiApi,
-  sendMessageApi
+  sendMessageApi,
+  getLiveStreamUrlApi
 };

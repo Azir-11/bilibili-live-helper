@@ -9,7 +9,8 @@ export type Path =
   | "/music"
   | "/prompt"
   | "/clock"
-  | "/splash-screen";
+  | "/splash-screen"
+  | "/preview";
 
 export type Route = Rewrite<
   RouteRecordRaw,

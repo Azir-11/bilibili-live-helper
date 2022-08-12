@@ -124,6 +124,22 @@ export const routes: Route[] = [
         ...commonOption
       }
     }
+  },
+  {
+    path: "/preview",
+    name: "preview",
+    component: () => import("@/views/preview-helper/index.vue"),
+    meta: {
+      tauriOption: {
+        ...commonOption,
+        title: commonTitle + "直播预览",
+        x: getAvailWidth() - 500,
+        y: getAvailHeight() - 320,
+        width: 500,
+        height: 320,
+        resizable: true
+      }
+    }
   }
 ];
 

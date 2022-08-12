@@ -32,7 +32,8 @@ export const IS_TOP: Record<Path, string> = {
   "/fans": "is_top.fans",
   "/music": "is_top.music",
   "/prompt": "is_top.prompt",
-  "/splash-screen": "is_top.splash-screen"
+  "/splash-screen": "is_top.splash-screen",
+  "/preview": "is_top.preview"
 };
 
 export const VOICE_BROADCAST = "voice_broadcast";
