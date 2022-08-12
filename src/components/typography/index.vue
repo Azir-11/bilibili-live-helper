@@ -72,14 +72,14 @@ watch(isCopy, (newValue) => {
       :style="{ 'max-width': isNaN(Number(width)) ? width : width + 'px' }"
     >
       <template v-if="!linkable">
-        {{ content || "正在努力获取中..." }}
+        {{ content || "loading..." }}
       </template>
       <n-a
         :href="link || content"
         target="_blank"
         v-else
       >
-        {{ content || "正在努力获取中..." }}
+        {{ content || "loading..." }}
       </n-a>
     </n-ellipsis>
 

@@ -37,3 +37,17 @@ img {
 .n-icon {
   transition: all 0.3s;
 }
+
+.n-loading-bar-container {
+  .n-loading-bar {
+    &.n-loading-bar--starting {
+      background-color: var(--blue-color);
+    }
+    &.n-loading-bar--finishing {
+      background-color: var(--green-color);
+    }
+    &.n-loading-bar--error {
+      background-color: var(--red-color);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { fetch } from "@tauri-apps/api/http";
 import type { FetchOptions } from "@tauri-apps/api/http";
-import { NaiveMessage } from "@/utils/navie";
+import { NaiveMessage, NaiveLoadingBar } from "@/utils/navie";
 import type { Rewrite } from "@/types";
 
 // 请求总入口
@@ -10,11 +10,14 @@ const getQueryData = async (
     Partial<FetchOptions>,
     {
       returnError?: boolean;
+      hideLoadingBar?: boolean;
     }
   >
 ) => {
+  const { method, returnError, headers, hideLoadingBar } = options;
+
   try {
-    const { method, returnError, headers } = options;
+    !hideLoadingBar && NaiveLoadingBar.start();
 
     const { data: response }: Record<string, any> = await fetch(url, {
       ...options,
@@ -28,11 +31,15 @@ const getQueryData = async (
     });
 
     if (returnError || response?.code === 0 || response?.code === 200) {
+      !hideLoadingBar && NaiveLoadingBar.finish();
+
       return response?.data ?? response;
     } else {
       throw response?.message || response?.msg || "请求出错，再试试吧~";
     }
   } catch (error: any) {
+    !hideLoadingBar && NaiveLoadingBar.error();
+
     let errorMessage = error;
 
     if (error.includes("timed out")) {

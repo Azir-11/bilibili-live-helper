@@ -10,10 +10,8 @@ import { IS_TOP } from "@/constants";
 import type { operateIconItem } from "@/types";
 import type { Path } from "@/types/router";
 
-// 路由对象
-const $route = useRoute();
 // 路由地址
-const path = $route.path as Path;
+const path = useRoute().path as Path;
 
 // 是否置顶
 const isTop = ref(!!(await getStore(IS_TOP[path])));

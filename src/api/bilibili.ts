@@ -56,7 +56,8 @@ const getUpNewVideoBVidApi = async () =>
       index: 1,
       jsonp: "jsonp"
     },
-    returnError: true
+    returnError: true,
+    hideLoadingBar: true
   });
 
 // 获取 up 最新一期视频的信息
@@ -67,7 +68,8 @@ const getUpNewVideoInfoApi = async () => {
   if (bvidResult?.code) return;
 
   const result = await getQueryData(`${BASE_URL_PREFIX}/x/web-interface/view`, {
-    query: { bvid: bvidResult.data.list.vlist[0].bvid }
+    query: { bvid: bvidResult.data.list.vlist[0].bvid },
+    hideLoadingBar: true
   });
   console.log("result", result);
   if (result?.code) return;
