@@ -151,10 +151,10 @@ const sendMessageApi = async () => {
 };
 
 // 获取直播视频流
-const getLiveStreamUrlApi = async (qn: string = "0") =>
+const getLiveStreamUrlApi = async (qn: string = "0", roomid?: string) =>
   await getQueryData(`${LIVE_URL_PREFIX}/room/v1/Room/playUrl`, {
     query: {
-      cid: await getStore(UP_INFO.room_id),
+      cid: roomid || (await getStore(UP_INFO.room_id)),
       qn,
       platform: "web"
     }

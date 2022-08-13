@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import "xgplayer";
 import FlvJsPlayer from "xgplayer-flv.js";
 import { getLiveStreamUrlApi } from "@/api";
 
@@ -38,10 +37,9 @@ onMounted(async () => {
     poster: props.cover,
     volume: 0.1,
     isLive: true,
-    playsinline: true,
     autoplay: true,
     width: "100%",
-    height: "100%",
+    height: 320,
     pip: true
   });
 
@@ -51,7 +49,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="live-video h-[320px]"
+    class="live-video h-[320px] bg-black"
     id="xg-player"
   />
 </template>

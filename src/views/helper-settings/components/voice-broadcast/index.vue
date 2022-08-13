@@ -98,7 +98,7 @@ const keywordRender = (row: SoundItem) =>
       <n-card
         size="small"
         :segmented="{
-          content: true
+          content: true,
         }"
         class="m-t-3"
       >
@@ -145,17 +145,17 @@ const keywordRender = (row: SoundItem) =>
             @update:value="toggleChange"
           />
         </template>
+        <div class="content">
+          <n-data-table
+            striped
+            size="small"
+            :columns="columns"
+            :data="soundConfig.files"
+            :bordered="true"
+            :pagination="pagination"
+          />
+        </div>
       </n-card>
-      <div class="content">
-        <n-data-table
-          striped
-          size="small"
-          :columns="columns"
-          :data="soundConfig.files"
-          :bordered="true"
-          :pagination="pagination"
-        />
-      </div>
     </div>
   </div>
 </template>
