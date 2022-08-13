@@ -9,6 +9,8 @@ import { APP_NAME, LOGOUT_CONFIRM } from "@/constants";
 import { clearUpInfo } from "@/utils/auth";
 import Loading from "@/components/loading/index.vue";
 import { useAnchorInfoStore } from "@/store/pinia/anchorInfo";
+import { initSpeech } from "@/helper/initSpeech";
+import { initSound } from "@/helper/initSound";
 
 // up 的信息
 const { anchorInfo } = storeToRefs(useAnchorInfoStore());
@@ -71,6 +73,8 @@ const logout = async () => {
 
 onMounted(() => {
   closeWindow("/splash-screen");
+  initSpeech();
+  initSound();
 });
 
 // 监听 up 信息，如果有直播间地址，就解禁菜单

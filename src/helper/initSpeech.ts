@@ -36,7 +36,6 @@ const handleSpeech = async (type: string, item: any) => {
   if (!speechConfig.value.isOpen) return;
   switch (type) {
     case WELCOME: {
-      console.log(WELCOME, speechConfig.value.onWelcome);
       if (!speechConfig.value.onWelcome) break;
 
       const { uname } = item;
@@ -47,7 +46,6 @@ const handleSpeech = async (type: string, item: any) => {
     }
 
     case GIFT: {
-      console.log(GIFT, speechConfig.value.onGift);
       // 礼物信息
       if (!speechConfig.value.onGift) break;
 
@@ -60,7 +58,6 @@ const handleSpeech = async (type: string, item: any) => {
     }
 
     case DANMU: {
-      console.log(DANMU, speechConfig.value.onDanmu);
       // 弹幕信息
       if (!speechConfig.value.onDanmu) break;
       const { isEmoji, message, uname } = item;
@@ -77,7 +74,6 @@ const handleSpeech = async (type: string, item: any) => {
 
 const synth = window.speechSynthesis;
 const playSpeech = () => {
-  console.log("voices", voiceList.length);
   setInterval(() => {
     // 关闭语音播报时清空列表
     if (!speechConfig.value.isOpen) {
@@ -110,16 +106,15 @@ const playSpeech = () => {
       const speech = new SpeechSynthesisUtterance();
 
       speech.text = speechList.value.shift()?.str || "";
-      // speech.voice =
-      //   voiceList.find(
-      //     (voice) => voice.value === speechConfig.value.speechVoice
-      //   )?.origin || voiceList[0].origin;
+      speech.voice =
+        voiceList.find(
+          (voice) => voice.value === speechConfig.value.speechVoice
+        )?.origin || voiceList[0].origin;
 
       speech.rate = speechConfig.value.rate; // 语速
       speech.volume = speechConfig.value.volume / 100; // 音量
       speech.pitch = speechConfig.value.pitch; // 音调
 
-      console.log("播放了", speech);
       synth.speak(speech);
     }
   }, 0);
@@ -142,6 +137,4 @@ const initSpeech = () => {
   playSpeech();
 };
 
-initSpeech();
-
-export { voiceList, speechConfig, toggleChange };
+export { voiceList, speechConfig, toggleChange, initSpeech };

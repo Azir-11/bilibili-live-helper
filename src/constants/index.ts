@@ -38,6 +38,8 @@ export const IS_TOP: Record<Path, string> = {
 
 export const VOICE_BROADCAST = "voice_broadcast";
 
+export const BARRAGE_SOUND = "barrage_sound";
+
 export * from "./url";
 export * from "./events";
 export * from "./store";

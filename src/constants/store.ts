@@ -11,6 +11,11 @@ const STORE_DEFAULT_VALUES: Record<string, any> = {
     volume: 50,
     rate: 1,
     pitch: 1
+  },
+  barrage_sound: {
+    isOpen: true,
+    volume: 50,
+    files: []
   }
 };
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { voiceList, speechConfig, toggleChange } from "@/helper/voiceSpeech";
+import { voiceList, speechConfig, toggleChange } from "@/helper/initSpeech";
 </script>
 
 <template>
   <n-card
+    size="small"
     title="语音播报"
     :segmented="{
-      content: true,
-      footer: 'soft'
+      content: true
     }"
   >
     <template #header-extra>

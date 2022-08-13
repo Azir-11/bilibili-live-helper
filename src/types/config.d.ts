@@ -8,3 +8,15 @@ export type Speech = {
   rate: number;
   pitch: number;
 };
+
+export type SoundItem = {
+  key: string;
+  keyword: string[];
+  status: boolean;
+};
+
+export type Sound = {
+  isOpen: boolean;
+  volume: number;
+  files: SoundItem[];
+};
