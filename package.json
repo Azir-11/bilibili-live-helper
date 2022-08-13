@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "docs:dev": "npx vitepress dev docs",
     "docs:build": "npx vitepress build docs",
     "docs:serve": "npx vitepress serve docs",

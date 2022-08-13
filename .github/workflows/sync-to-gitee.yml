@@ -1,18 +1,20 @@
 name: Sync Github Repos To Gitee
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master
+    tags:
+      - "v*"
 jobs:
-    repo-sync:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Sync Github Repos To Gitee
-              uses: Yikun/hub-mirror-action@master
-              with:
-                  src: github/bilibili-ayang
-                  dst: gitee/bilibili-ayang
-                  dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
-                  dst_token: ${{ secrets.GITEE_TOKEN }}
-                  static_list: "bilibili-live-helper"
-                  force_update: true
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync Github Repos To Gitee
+        uses: Yikun/hub-mirror-action@master
+        with:
+          src: github/bilibili-ayang
+          dst: gitee/bilibili-ayang
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: "bilibili-live-helper"
+          force_update: true
