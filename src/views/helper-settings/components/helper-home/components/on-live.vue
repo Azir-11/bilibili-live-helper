@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LiveVideo from "./live-video.vue";
 import Typography from "@/components/typography/index.vue";
 import { getLiveStreamApi, getLiveCodeApi } from "@/api";
 
@@ -91,19 +92,9 @@ onMounted(getLiveStream);
   <n-card
     class="mt-5 overflow-hidden"
     hoverable
-    :content-style="{ overflow: 'hidden', padding: 0 }"
-    ref="iframeParentRef"
+    :content-style="{ padding: 0 }"
   >
-    <!-- <iframe
-      style="width: 100%; height: 320px"
-      :src="`https://www.bilibili.com/blackboard/live/live-activity-player.html?cid=${anchorInfo?.room_id}&quality=0`"
-      frameborder="no"
-      framespacing="0"
-      scrolling="no"
-      allow="autoplay; encrypted-media; Picture-in-picture"
-      allowfullscreen="true"
-      ref="iframeRef"
-    /> -->
+    <LiveVideo :cover="anchorInfo?.cover" />
 
     <div class="flex flex-col gap-4 p-4">
       <n-text>标题：{{ anchorInfo?.title }}</n-text>

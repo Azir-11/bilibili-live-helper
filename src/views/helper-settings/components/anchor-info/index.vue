@@ -35,8 +35,6 @@ const { anchorInfo } = storeToRefs(useAnchorInfoStore());
         :content="anchorInfo?.live_url"
       />
     </n-card>
-
-    <n-card segmented />
   </div>
 </template>
 

@@ -53,7 +53,7 @@ onMounted(() => setWindowOnTop(isTop.value));
 
 <template>
   <div
-    class="base-operate flex cursor-move items-center justify-end gap-3 p-3"
+    class="base-operate absolute top-0 left-0 flex h-full w-full cursor-move items-center justify-end gap-3 rounded-t-xl bg-black/80 px-[10px] opacity-0 group-hover:opacity-100"
     data-tauri-drag-region
   >
     <n-tooltip
@@ -73,6 +73,7 @@ onMounted(() => setWindowOnTop(isTop.value));
 
 <style scoped lang="scss">
 .base-operate {
+  transition: all 0.3s;
   ::v-deep(.n-icon) {
     @apply cursor-pointer text-[17px] text-[#999] hover:text-[#fff];
     &.active {
