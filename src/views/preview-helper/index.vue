@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import flvjs from "flv.js";
 import { listen } from "@tauri-apps/api/event";
+import {
+  appWindow,
+  LogicalPosition,
+  LogicalSize,
+  currentMonitor
+} from "@tauri-apps/api/window";
 import { getLiveStreamUrlApi } from "@/api";
 import BaseHeader from "@/components/base-operate/index.vue";
 
@@ -49,10 +55,6 @@ const initPlayer = () => {
       initPlayer();
     });
 
-    // flvPlayer.on(flvjs.Events.METADATA_ARRIVED, (data: any) => {
-    //   console.log("METADATA_ARRIVED", data);
-    // });
-
     flvPlayer.on(flvjs.Events.ERROR, (data: any) => {
       console.log("加载失败", data);
       destryPlayer();
@@ -61,6 +63,33 @@ const initPlayer = () => {
     flvPlayer.on(flvjs.Events.MEDIA_INFO, (data: any) => {
       console.log("MEDIA_INFO", data);
     });
+
+    videoElement!.onresize = async (val: any) => {
+      const ratio = val.target.videoWidth / val.target.videoHeight;
+      const monitor = await currentMonitor();
+      if (!ratio) return;
+      if (ratio > 1) {
+        // 横屏
+        appWindow.setMinSize(new LogicalSize(480, 270));
+        appWindow.setSize(new LogicalSize(480, 270));
+        appWindow.setPosition(
+          new LogicalPosition(
+            monitor!.size.width - 500,
+            monitor!.size.height - 290
+          )
+        );
+      } else {
+        // 竖屏
+        appWindow.setMinSize(new LogicalSize(225, 400));
+        appWindow.setSize(new LogicalSize(225, 400));
+        appWindow.setPosition(
+          new LogicalPosition(
+            monitor!.size.width - 275,
+            monitor!.size.height - 420
+          )
+        );
+      }
+    };
   }
 };
 
@@ -78,27 +107,25 @@ const destryPlayer = () => {
 watch(roomId, async () => {
   destryPlayer();
   // 加载新的流
-  const res = await getLiveStreamUrlApi(roomId.value);
+  const res = await getLiveStreamUrlApi("10000", roomId.value);
   if (!res) return;
   url.value = res.durl[0].url;
   initPlayer();
 });
 
-onMounted(() =>
+onMounted(() => {
   listen<string>("preview-room", (event) => {
     roomId.value = event.payload;
-  })
-);
+  });
+});
 </script>
 
 <template>
   <div
-    class="preview-helper relative"
+    class="preview-helper group relative flex h-full items-center justify-center bg-black/60"
     @wheel="changeVolume"
   >
-    <base-header
-      class="absolute left-1/2 top-[5px] -translate-x-1/2 transform"
-    />
+    <BaseHeader class="z-99 top-0 !h-[30px]" />
     <video
       id="videoElement"
       :volume="volume"

@@ -134,9 +134,9 @@ export const routes: Route[] = [
         ...commonOption,
         title: commonTitle + "直播预览",
         x: getAvailWidth() - 500,
-        y: getAvailHeight() - 320,
+        y: getAvailHeight() - 420,
         width: 500,
-        height: 320,
+        height: 420,
         resizable: true
       }
     }
