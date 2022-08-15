@@ -1,7 +1,9 @@
 import { Body } from "@tauri-apps/api/http";
 import { getQueryData } from ".";
 import { getStore } from "@/store/tauri";
-import { LIVE_URL_PREFIX, UP_INFO } from "@/constants";
+import { LIVE_URL_PREFIX, UP_INFO, ROBOT_INFO } from "@/constants";
+import { robotIsLogin } from "@/utils/auth";
+import type { SendMessage } from "@/types";
 
 // 获取直播分类
 const getLiveCategoryApi = async () =>
@@ -109,45 +111,53 @@ const getEmojiApi = async () =>
     {
       query: {
         platform: "pc",
-        room_id: ""
+        room_id: await getStore(UP_INFO.room_id)
       },
       headers: {
-        cookie: ""
+        cookie: await getStore(UP_INFO.cookie)
       },
-      returnError: true
+      hideLoadingBar: true
     }
   );
 
 // 发送消息
-const sendMessageApi = async () => {
-  // let cookie, csrf;
-  // // 判断是主动发送，还是自动回复
-  // if (message.isInitiative) {
-  //   csrf = getStore(UP_INFO.csrf);
-  //   cookie = getStore(UP_INFO.cookie);
-  // } else {
-  //   csrf = getStore(ROBOT_INFO.csrf) || getStore(UP_INFO.csrf);
-  //   cookie = getStore(ROBOT_INFO.cookie) || getStore(UP_INFO.cookie);
-  // }
-  // return await getQueryData(`${liveBaseUrl}/msg/send`, {
-  //   method: "post",
-  //   params: {
-  //     ...message,
-  //     bubble: 0,
-  //     color: 16777215,
-  //     mode: 1,
-  //     fontsize: 25,
-  //     rnd: Math.floor(Date.now() / 1000),
-  //     roomid: getStore(UP_INFO.roomId),
-  //     csrf,
-  //     csrf_token: csrf,
-  //   },
-  //   option: {
-  //     headers: {
-  //       baseCookie: cookie,
-  //     },
-  //   },
-  // });
+const sendMessageApi = async (message: SendMessage) => {
+  let cookie, csrf;
+
+  // 如果有机器人账户信息
+  if (await robotIsLogin()) {
+    // 主动发送 or 自动发送
+    if (message.isInitiative) {
+      cookie = await getStore(UP_INFO.cookie);
+      csrf = await getStore(UP_INFO.csrf);
+    } else {
+      cookie = await getStore(ROBOT_INFO.cookie);
+      csrf = await getStore(ROBOT_INFO.cookie);
+    }
+  } else {
+    cookie = await getStore(UP_INFO.cookie);
+    csrf = await getStore(UP_INFO.csrf);
+  }
+
+  return await getQueryData(`${LIVE_URL_PREFIX}/msg/send`, {
+    method: "POST",
+    body: Body.form({
+      ...message,
+      isInitiative: "",
+      bubble: "0",
+      color: "16777215",
+      mode: "1",
+      fontsize: "25",
+      rnd: Math.floor(Date.now() / 1000).toString(),
+      roomid: await getStore(UP_INFO.room_id),
+      csrf,
+      csrf_token: csrf
+    }),
+    headers: {
+      cookie
+    },
+    hideLoadingBar: true
+  });
 };
 
 // 获取直播视频流

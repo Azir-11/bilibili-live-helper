@@ -9,6 +9,12 @@ export const UP_INFO = {
   uname: "up_info.uname"
 };
 
+export const ROBOT_INFO = {
+  uid: "robot_info.uid",
+  cookie: "robot_info.cookie",
+  csrf: "robot_info.csrf"
+};
+
 export const MESSAGE_TYPE = {
   RANK: "ONLINE_RANK_V2",
   DANMU: "DANMU_MSG",

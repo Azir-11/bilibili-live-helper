@@ -11,5 +11,11 @@ export interface operateIconItem {
   clickEvent: () => void;
 }
 
+export interface SendMessage {
+  msg: string;
+  dm_type?: string;
+  isInitiative?: boolean;
+}
+
 export * from "./bilibili";
 export * from "./config";

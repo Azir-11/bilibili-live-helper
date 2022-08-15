@@ -1,0 +1,40 @@
+.send-message {
+  ::v-deep(.n-input) {
+    @apply bg-transparent;
+    .n-input-wrapper {
+      @apply p-0 text-[12px];
+      input {
+        @apply text-white;
+      }
+    }
+
+    .n-input__border,
+    .n-input__state-border {
+      @apply border-0  shadow-none;
+    }
+  }
+
+  ::v-deep(.v-binder-follower-container) {
+    .v-binder-follower-content {
+      @apply left-[10px] w-full;
+      .n-popover {
+        @apply h-[250px] w-full p-0;
+        .n-popover__content {
+          @apply h-full;
+          .n-tabs {
+            @apply h-full;
+            .n-tabs-nav {
+              @apply px-[10px] pt-[10px];
+            }
+            .n-tab-pane {
+              @apply mt-[10px] flex h-[calc(100%-59px)] flex-wrap overflow-auto p-0;
+            }
+          }
+        }
+        .n-popover-arrow-wrapper {
+          @apply right-[4px];
+        }
+      }
+    }
+  }
+}
