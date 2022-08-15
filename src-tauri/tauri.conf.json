@@ -1,14 +1,14 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "beforeBuildCommand": "npm run build",
+    "beforeBuildCommand": "npm run build & npx @tauri-apps/tauricon ./public/logo.svg",
     "beforeDevCommand": "npm run dev",
     "devPath": "http://localhost:5173",
     "distDir": "../dist"
   },
   "package": {
-    "productName": "bilibili-live-helper",
-    "version": "0.1.0"
+    "productName": "哔哩哔哩-直播助手",
+    "version": "../package.json"
   },
   "tauri": {
     "macOSPrivateApi": true,
@@ -43,7 +43,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.prod",
+      "identifier": "com.bilibili-live-helper",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
