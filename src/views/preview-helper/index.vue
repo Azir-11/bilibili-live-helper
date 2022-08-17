@@ -9,6 +9,7 @@ import {
 } from "@tauri-apps/api/window";
 import { getLiveStreamUrlApi } from "@/api";
 import BaseHeader from "@/components/base-operate/index.vue";
+import { closeWindow } from "@/utils/tauri";
 
 const url = ref("");
 let flvPlayer = reactive<any>({});
@@ -51,13 +52,14 @@ const initPlayer = () => {
 
     flvPlayer.on(flvjs.Events.LOADING_COMPLETE, (data: any) => {
       console.log("视频流停止", data);
-      destryPlayer();
-      initPlayer();
+      destroyPlayer();
+      closeWindow();
     });
 
     flvPlayer.on(flvjs.Events.ERROR, (data: any) => {
       console.log("加载失败", data);
-      destryPlayer();
+      destroyPlayer();
+      closeWindow();
     });
 
     flvPlayer.on(flvjs.Events.MEDIA_INFO, (data: any) => {
@@ -93,7 +95,7 @@ const initPlayer = () => {
   }
 };
 
-const destryPlayer = () => {
+const destroyPlayer = () => {
   if (Object.keys(flvPlayer).length) {
     // 关闭之前的流
     flvPlayer.pause();
@@ -105,7 +107,7 @@ const destryPlayer = () => {
 };
 
 watch(roomId, async () => {
-  destryPlayer();
+  destroyPlayer();
   // 加载新的流
   const res = await getLiveStreamUrlApi("10000", roomId.value);
   if (!res) return;

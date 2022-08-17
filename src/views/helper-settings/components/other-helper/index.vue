@@ -10,6 +10,9 @@ import { openNewWindow } from "@/utils/tauri";
     <n-button @click="openNewWindow('/clock')">
       时钟姬
     </n-button>
+    <n-button @click="openNewWindow('/rooms')">
+      直播间管理
+    </n-button>
   </div>
 </template>
 

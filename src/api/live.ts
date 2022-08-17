@@ -170,6 +170,21 @@ const getLiveStreamUrlApi = async (qn: string = "0", roomid?: string) =>
     }
   });
 
+// 获取关注的主播列表
+const getMyFollowLiveInfo = async (page: string = "1") =>
+  await getQueryData(
+    `${LIVE_URL_PREFIX}/xlive/web-ucenter/v1/xfetter/GetWebList`,
+    {
+      query: {
+        page,
+        page_size: "10"
+      },
+      headers: {
+        cookie: await getStore(UP_INFO.cookie)
+      }
+    }
+  );
+
 export {
   getLiveCategoryApi,
   getLiveStatusApi,
@@ -179,5 +194,6 @@ export {
   getGiftApi,
   getEmojiApi,
   sendMessageApi,
-  getLiveStreamUrlApi
+  getLiveStreamUrlApi,
+  getMyFollowLiveInfo
 };

@@ -140,6 +140,19 @@ export const routes: Route[] = [
         resizable: true
       }
     }
+  },
+  {
+    path: "/rooms",
+    name: "rooms",
+    component: () => import("@/views/rooms-helper/index.vue"),
+    meta: {
+      tauriOption: {
+        ...commonOption,
+        title: commonTitle + "直播间管理",
+        width: 700,
+        height: 640
+      }
+    }
   }
 ];
 
